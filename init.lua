@@ -1,20 +1,23 @@
+local opt = vim.opt
+
 -- tab settings
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+opt.tabstop = 4
+opt.softtabstop = 4
+opt.shiftwidth = 4
+opt.expandtab = true
 
 -- side number settings
-vim.opt.number = true
-vim.opt.relativenumber = true
+opt.number = true
+opt.relativenumber = true
 
 -- cursorline
-vim.opt.cursorline = true
+opt.cursorline = true
+-- opt.cursorcolumn = true
 
 -- wrap settings
-vim.opt.breakindent = true
-vim.opt.linebreak = true
-vim.opt.showbreak = '> '
+opt.breakindent = true
+opt.linebreak = true
+opt.showbreak = '> '
 
 -- declare plugins and configure them
 require('plugins')

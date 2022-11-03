@@ -1,40 +1,47 @@
+-- remember to run PackerCompile after modifying this file
 require('packer').startup(function(use)
+
     -- packer manages itself
     use 'wbthomason/packer.nvim'
-    
+
     -- editing, movement and text objects
     use 'machakann/vim-sandwich'            -- manipulating parentheses, brackets, quotes, etc.
     use 'vim-scripts/ReplaceWithRegister'   -- replace text object with register
-    use 'svermeulen/vim-cutlass'            -- new delete operation
+    use {                                   -- new delete operation
+        'svermeulen/vim-cutlass',
+        config = [[require('plugins.vim-cutlass')]],
+    }
 
     -- auto completion
 
 
     -- lsp stuff
 
-    
+
     -- latex stuff
-    use 'lervag/vimtex'
+    use {
+        'lervag/vimtex',
+        ft = 'tex',
+    }
 
     -- markdown stuff
-    use({
+    use {
         'iamcco/markdown-preview.nvim',
+        ft = 'markdown',
         run = function() vim.fn['mkdp#util#install']() end,
-    })
-
-    -- other (copilot, fcitx, opera, vimtex)
-    use 'matveyt/vim-opera'                 -- visual commands apply to part of line
-    use 'github/copilot.vim'
-    use 'lilydjwg/fcitx.vim'                -- switch to English when leaving insert mode
+    }
 
     -- treesitter stuff
 
+    -- other
+    use 'github/copilot.vim'
+    use {                                   -- switch to English when leaving insert mode
+        'lilydjwg/fcitx.vim',
+        ft = 'tex',
+    }
+    use 'matveyt/vim-opera'                 -- range commands apply to part of line
+    use {                                   -- show and remove trailing whitespaces
+        'jdhao/whitespace.nvim',
+        event = 'VimEnter',
+    }
 end)
-
--- svermeulen/vim-cutlass
-vim.api.nvim_set_keymap('n', 'x', 'd', {noremap = true})    -- normal mode: x{textobject} => cut textobject
-vim.api.nvim_set_keymap('x', 'x', 'd', {noremap = true})    -- visual mode; x => cut selection
-vim.api.nvim_set_keymap('n', 'xx', 'dd', {noremap = true})  -- normal mode: xx => cut this line
-vim.api.nvim_set_keymap('n', 'X', 'D', {noremap = true})    -- normal mode: X => cut to end of line
-
-
