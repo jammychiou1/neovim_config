@@ -34,7 +34,29 @@ require('packer').startup(function(use)
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
 
     -- lsp stuff
-
+    use {                                       -- auto install lsp & other servers
+        'williamboman/mason.nvim',
+        config = function()
+            require('mason').setup()
+        end,
+    }
+    use {
+        'williamboman/mason-lspconfig.nvim',    -- auto config lsp servers
+        config = function()
+            require('plugins.mason-lspconfig')
+        end,
+        after = {
+            'mason.nvim',
+            'nvim-lspconfig',
+        },
+    }
+    use {
+        'neovim/nvim-lspconfig',
+        config = function()
+            require('plugins.nvim-lspconfig')
+        end,
+        after = 'cmp-nvim-lsp',
+    }
 
     -- latex stuff
     use {
@@ -62,7 +84,11 @@ require('packer').startup(function(use)
     }
     use {                                   -- switch to English when leaving insert mode
         'lilydjwg/fcitx.vim',
-        ft = 'tex',
+        setup = function()
+            --vim.g.fcitx5_remote = '/usr/bin/fcitx5-remote'
+            vim.g.fcitx5_remote = 'fcitx5-remote'
+        end,
+        ft = { 'tex', 'markdown' },
     }
     use 'matveyt/vim-opera'                 -- range commands apply to part of line
     use {                                   -- show and remove trailing whitespaces
