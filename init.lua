@@ -19,5 +19,8 @@ opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = '> '
 
+-- status line already has ruler
+opt.ruler = false
+
 -- declare plugins and configure them
 require('plugins')

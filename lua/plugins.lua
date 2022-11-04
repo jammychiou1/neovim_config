@@ -94,4 +94,15 @@ require('packer').startup(function(use)
         'jdhao/whitespace.nvim',
         event = 'VimEnter',
     }
+    use {                                   -- statusline, remember to install patch fonts https://www.nerdfonts.com/#home
+        'nvim-lualine/lualine.nvim',
+        config = function()
+            require('lualine').setup({
+                options = {
+                    theme = 'codedark',
+                },
+            })
+        end,
+        requires = { 'kyazdani42/nvim-web-devicons' }
+    }
 end)
