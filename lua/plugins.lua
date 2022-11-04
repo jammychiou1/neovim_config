@@ -85,7 +85,6 @@ require('packer').startup(function(use)
     use {                                   -- switch to English when leaving insert mode
         'lilydjwg/fcitx.vim',
         setup = function()
-            --vim.g.fcitx5_remote = '/usr/bin/fcitx5-remote'
             vim.g.fcitx5_remote = 'fcitx5-remote'
         end,
         ft = { 'tex', 'markdown' },
