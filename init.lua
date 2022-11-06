@@ -22,5 +22,9 @@ opt.showbreak = '> '
 -- status line already has ruler
 opt.ruler = false
 
+-- reference:
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- declare plugins and configure them
 require('plugins')
