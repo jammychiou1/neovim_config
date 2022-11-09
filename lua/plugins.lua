@@ -22,12 +22,21 @@ require('packer').startup(function(use)
         end
     }
 
+    -- copilot
+    use {
+        'github/copilot.vim',
+        config = function()
+            require('plugins.copilot')
+        end,
+    }
+
     -- auto completion
     use {
         'hrsh7th/nvim-cmp',
         config = function()
             require('plugins.nvim-cmp')
         end,
+        after = 'copilot.vim',
     }
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
@@ -103,7 +112,7 @@ require('packer').startup(function(use)
         tag = 'v3.*',
         config = function()
             require('bufferline').setup({
-                highlights = require("catppuccin.groups.integrations.bufferline").get()
+                highlights = require('catppuccin.groups.integrations.bufferline').get()
             })
         end,
     }
@@ -132,49 +141,9 @@ require('packer').startup(function(use)
     use {
         'theHamsta/nvim-semantic-tokens',   -- semantic highlighting
         after = 'nvim-treesitter',
-        -- reference: https://alpha2phi.medium.com/neovim-semantic-highlighting-6c702bd816cf
         config = function()
-            -- local set_hl = vim.api.nvim_set_hl
-            -- -- token
-            -- -- https://github.com/nvim-treesitter/nvim-treesitter/blob/master/lua/nvim-treesitter/highlight.lua
-            -- set_hl(0, "LspParameter", { link = "TSParameter" })
-            -- set_hl(0, "LspType", { link = "TSType" })
-            -- set_hl(0, "LspClass", { link = "TSStorageClass" })
-            -- set_hl(0, "LspComment", { link = "TSComment" })
-            -- set_hl(0, "LspDecorator", { link = "TSAnnotation" })
-            -- set_hl(0, "LspEnum", { link = "TSType" })
-            -- set_hl(0, "LspEnumMember", { link = "TSParameter" })
-            -- set_hl(0, "LspEvent", { link = "TSProperty" })
-            -- set_hl(0, "LspFunction", { link = "TSFunction" })
-            -- set_hl(0, "LspInterface", { link = "TSKeywordFunction" })
-            -- set_hl(0, "LspKeyword", { link = "TSKeyword" })
-            -- set_hl(0, "LspMacro", { link = "TSFuncMacro" })
-            -- set_hl(0, "LspMethod", { link = "TSMethod" })
-            -- set_hl(0, "LspModifier", { link = "TSTypeQualifier" })
-            -- set_hl(0, "LspNamespace", { link = "TSNamespace" })
-            -- set_hl(0, "LspNumber", { link = "TSNumber" })
-            -- set_hl(0, "LspOperator", { link = "TSOperator" })
-            -- set_hl(0, "LspProperty", { link = "TSProperty" })
-            -- set_hl(0, "LspRegexp", { link = "TSStringRegex" })
-            -- set_hl(0, "LspString", { link = "TSString" })
-            -- set_hl(0, "LspStruct", { link = "TSTypeDefinition" })
-            -- set_hl(0, "LspTypeParameter", { link = "TSType" })
-            -- set_hl(0, "LspVariable", { link = "TSVariable" })
-
-            -- -- modifier
-            -- set_hl(0, "LspDeclaration", { link = "TSDefine" })
-            -- set_hl(0, "LspDefinition", { link = "TSTypeDefinition" })
-            -- set_hl(0, "LspReadonly", { link = "TSContant" })
-            -- set_hl(0, "LspStatic", { link = "TSConsantMacro" })
-            -- set_hl(0, "LspDeprecated", { link = "TSWarning" })
-            -- set_hl(0, "LspAbstract", { fg = "#9E6162" })
-            -- set_hl(0, "LspAsync", { fg = "#81A35C" })
-            -- set_hl(0, "LspModification", { fg = "#7E5CA3" })
-            -- set_hl(0, "LspDocumentation", { fg = "#ccc0f5" })
-            -- set_hl(0, "LspDefaultLibrary", { fg = "#c99dc1" })
-
-            require("nvim-semantic-tokens").setup {
-                preset = "default",
+            require('nvim-semantic-tokens').setup {
+                preset = 'default',
                 -- highlighters is a list of modules following the interface of nvim-semantic-tokens.table-highlighter or
                 -- function with the signature: highlight_token(ctx, token, highlight) where
                 --        ctx (as defined in :h lsp-handler)
@@ -186,12 +155,6 @@ require('packer').startup(function(use)
     }
 
     -- other
-    use {
-        'github/copilot.vim',
-        config = function()
-            require('plugins.copilot')
-        end,
-    }
     use {                                   -- switch to English when leaving insert mode
         'lilydjwg/fcitx.vim',
         setup = function()

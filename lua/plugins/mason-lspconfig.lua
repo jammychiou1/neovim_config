@@ -28,7 +28,7 @@ local my_on_attach = function(client, bufnr)
         ['gD'] = lsp.buf.declaration, -- go to declaration
         ['gd'] = lsp.buf.definition, -- go to definition
         ['gi'] = lsp.buf.implementation, -- go to implementation
-        ['gr'] = lsp.buf.references, -- show references
+        ['gR'] = lsp.buf.references, -- show references
         ['K'] = vim.lsp.buf.hover, -- show hover
         ['<C-k>'] = lsp.buf.signature_help, -- hint function signature
         ['<space>rn'] = lsp.buf.rename, -- rename variable
@@ -45,8 +45,8 @@ local my_on_attach = function(client, bufnr)
 
     -- reference: https://github.com/theHamsta/nvim-semantic-tokens
     if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-      local augroup = vim.api.nvim_create_augroup("SemanticTokens", {})
-      vim.api.nvim_create_autocmd("TextChanged", {
+      local augroup = vim.api.nvim_create_augroup('SemanticTokens', {})
+      vim.api.nvim_create_autocmd('TextChanged', {
         group = augroup,
         buffer = bufnr,
         callback = function()
