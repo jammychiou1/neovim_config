@@ -30,6 +30,13 @@ require('packer').startup(function(use)
         end,
     }
 
+    -- file finding
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        requires = { {'nvim-lua/plenary.nvim'} }
+        -- remember to install ripgrep
+    }
+
     -- auto completion
     use {
         'hrsh7th/nvim-cmp',
