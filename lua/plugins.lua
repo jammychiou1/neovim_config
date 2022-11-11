@@ -119,7 +119,10 @@ require('packer').startup(function(use)
         tag = 'v3.*',
         config = function()
             require('bufferline').setup({
-                highlights = require('catppuccin.groups.integrations.bufferline').get()
+                options = {
+                    mode = 'tabs',
+                },
+                highlights = require('catppuccin.groups.integrations.bufferline').get(),
             })
         end,
     }
@@ -129,6 +132,7 @@ require('packer').startup(function(use)
             require('nvim-tree').setup({
                 open_on_setup = true,
                 open_on_setup_file = true,
+                open_on_tab = true,
             })
         end,
     }

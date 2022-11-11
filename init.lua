@@ -19,6 +19,10 @@ opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = '> '
 
+-- smartcase for searching
+opt.ignorecase = true
+opt.smartcase = true
+
 -- status line already has ruler
 opt.ruler = false
 
