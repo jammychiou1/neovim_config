@@ -150,6 +150,9 @@ require('packer').startup(function(use)
         end,
     }
     use {
+      'nvim-treesitter/nvim-treesitter-textobjects'
+    }
+    use {
         'theHamsta/nvim-semantic-tokens',   -- semantic highlighting
         after = 'nvim-treesitter',
         config = function()
