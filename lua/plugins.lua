@@ -147,6 +147,11 @@ require('packer').startup(function(use)
                     enable = false
                 },
             }
+
+            local opt = vim.opt
+
+            opt.foldmethod = 'expr'
+            opt.foldexpr = 'nvim_treesitter#foldexpr()'
         end,
     }
     use {
