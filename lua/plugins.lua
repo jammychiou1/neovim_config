@@ -5,21 +5,35 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- editing, movement and text objects
-    use 'machakann/vim-sandwich'            -- manipulating parentheses, brackets, quotes, etc.
-    use 'vim-scripts/ReplaceWithRegister'   -- replace text object with register
-    use {                                   -- new delete operation
+    use 'machakann/vim-sandwich' -- manipulating parentheses, brackets, quotes, etc.
+    use 'vim-scripts/ReplaceWithRegister' -- replace text object with register
+    use { -- new delete operation
         'svermeulen/vim-cutlass',
         config = function()
             require('plugins.vim-cutlass')
+            vim.api.nvim_command 'runtime macros/sandwich/keymap/surround.vim'
         end,
     }
-    use 'vim-scripts/argtextobj.vim'        -- text objects for arguments
-    use {                                   -- easy motion
+    use 'vim-scripts/argtextobj.vim' -- text objects for arguments
+    use { -- easy motion
         'phaazon/hop.nvim',
-        branch = 'v2',                      -- optional but strongly recommended
+        branch = 'v2', -- optional but strongly recommended
         config = function()
             require('plugins.hop')
         end
+    }
+    use { -- fast insert mode exit
+        'max397574/better-escape.nvim',
+        config = function()
+            require('better_escape').setup({
+                keys = function()
+                    return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>l' or '<esc>'
+                end,
+            })
+
+            -- also exit terminal mode using jj
+            vim.api.nvim_set_keymap('t', 'jj', '<C-\\><C-n>', { noremap = true })
+        end,
     }
 
     -- copilot
@@ -33,7 +47,7 @@ require('packer').startup(function(use)
     -- file finding
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = { { 'nvim-lua/plenary.nvim' } }
         -- remember to install ripgrep
     }
 
@@ -50,14 +64,14 @@ require('packer').startup(function(use)
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
 
     -- lsp stuff
-    use {                                       -- auto install lsp & other servers
+    use { -- auto install lsp & other servers
         'williamboman/mason.nvim',
         config = function()
             require('mason').setup()
         end,
     }
     use {
-        'williamboman/mason-lspconfig.nvim',    -- auto config lsp servers
+        'williamboman/mason-lspconfig.nvim', -- auto config lsp servers
         config = function()
             require('plugins.mason-lspconfig')
         end,
@@ -90,8 +104,8 @@ require('packer').startup(function(use)
     }
 
     -- fancy visuals
-    use 'kyazdani42/nvim-web-devicons'      -- icons
-    use {                                   -- colorscheme
+    use 'kyazdani42/nvim-web-devicons' -- icons
+    use { -- colorscheme
         'catppuccin/nvim',
         as = 'catppuccin',
         config = function()
@@ -104,7 +118,7 @@ require('packer').startup(function(use)
             vim.api.nvim_command 'colorscheme catppuccin'
         end
     }
-    use {                                   -- fancy statusline, remember to install patch fonts https://www.nerdfonts.com/#home
+    use { -- fancy statusline, remember to install patch fonts https://www.nerdfonts.com/#home
         'nvim-lualine/lualine.nvim',
         config = function()
             require('lualine').setup({
@@ -114,7 +128,7 @@ require('packer').startup(function(use)
             })
         end,
     }
-    use {                                   -- fancy buffer line
+    use { -- fancy buffer line
         'akinsho/bufferline.nvim',
         tag = 'v3.*',
         config = function()
@@ -136,13 +150,13 @@ require('packer').startup(function(use)
             })
         end,
     }
-    use {                                   -- cfg syntax parsing
+    use { -- cfg syntax parsing
         'nvim-treesitter/nvim-treesitter',
         run = function()
             require('nvim-treesitter.install').update({ with_sync = true })
         end,
         config = function()
-            require'nvim-treesitter.configs'.setup {
+            require 'nvim-treesitter.configs'.setup {
                 highlight = {
                     enable = false
                 },
@@ -155,10 +169,10 @@ require('packer').startup(function(use)
         end,
     }
     use {
-      'nvim-treesitter/nvim-treesitter-textobjects'
+        'nvim-treesitter/nvim-treesitter-textobjects'
     }
     use {
-        'theHamsta/nvim-semantic-tokens',   -- semantic highlighting
+        'theHamsta/nvim-semantic-tokens', -- semantic highlighting
         after = 'nvim-treesitter',
         config = function()
             require('nvim-semantic-tokens').setup {
@@ -168,21 +182,21 @@ require('packer').startup(function(use)
                 --        ctx (as defined in :h lsp-handler)
                 --        token  (as defined in :h vim.lsp.semantic_tokens.on_full())
                 --        highlight (a helper function that you can call (also multiple times) with the determined highlight group(s) as the only parameter)
-                highlighters = { require 'nvim-semantic-tokens.table-highlighter'}
+                highlighters = { require 'nvim-semantic-tokens.table-highlighter' }
             }
         end,
     }
 
     -- other
-    use {                                   -- switch to English when leaving insert mode
+    use { -- switch to English when leaving insert mode
         'lilydjwg/fcitx.vim',
         setup = function()
             vim.g.fcitx5_remote = 'fcitx5-remote'
         end,
         ft = { 'tex', 'markdown' },
     }
-    use 'matveyt/vim-opera'                 -- range commands apply to part of line
-    use {                                   -- show and remove trailing whitespaces
+    use 'matveyt/vim-opera' -- range commands apply to part of line
+    use { -- show and remove trailing whitespaces
         'jdhao/whitespace.nvim',
         event = 'VimEnter',
     }
