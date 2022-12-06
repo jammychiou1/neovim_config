@@ -31,8 +31,8 @@ require('packer').startup(function(use)
                 end,
             })
 
-            -- also exit terminal mode using jj
-            vim.api.nvim_set_keymap('t', 'jj', '<C-\\><C-n>', { noremap = true })
+            -- also exit terminal mode using <C-j><C-j>
+            vim.api.nvim_set_keymap('t', '<C-j><C-j>', '<C-\\><C-n>', { noremap = true })
         end,
     }
 
@@ -91,6 +91,9 @@ require('packer').startup(function(use)
     -- latex stuff
     use {
         'lervag/vimtex',
+        config = function()
+            vim.opt.conceallevel = 2
+        end,
         ft = 'tex',
     }
 
