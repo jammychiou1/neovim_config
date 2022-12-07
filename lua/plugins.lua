@@ -1,4 +1,5 @@
 -- remember to run PackerCompile after modifying this file
+
 require('packer').startup(function(use)
 
     -- packer manages itself
@@ -51,17 +52,21 @@ require('packer').startup(function(use)
         -- remember to install ripgrep
     }
 
+    use 'hrsh7th/vim-vsnip'
+    use 'rafamadriz/friendly-snippets'
+
     -- auto completion
     use {
         'hrsh7th/nvim-cmp',
         config = function()
             require('plugins.nvim-cmp')
         end,
-        after = 'copilot.vim',
+        after = { 'copilot.vim', 'vim-vsnip' },
     }
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
+    use { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' }
 
     -- lsp stuff
     use { -- auto install lsp & other servers
