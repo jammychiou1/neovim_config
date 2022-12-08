@@ -38,12 +38,12 @@ require('packer').startup(function(use)
     }
 
     -- copilot
-    use {
-        'github/copilot.vim',
-        config = function()
-            require('plugins.copilot')
-        end,
-    }
+    -- use {
+    --     'github/copilot.vim',
+    --     config = function()
+    --         require('plugins.copilot')
+    --     end,
+    -- }
 
     -- file finding
     use {
@@ -52,17 +52,22 @@ require('packer').startup(function(use)
         -- remember to install ripgrep
     }
 
-    use 'hrsh7th/vim-vsnip'
-    use 'rafamadriz/friendly-snippets'
+    -- snippets
+    use 'hrsh7th/vim-vsnip' -- snippet engine
+    use 'rafamadriz/friendly-snippets' -- useful snippets
 
     -- auto completion
-    use {
+    use { -- completion engine
         'hrsh7th/nvim-cmp',
         config = function()
             require('plugins.nvim-cmp')
         end,
-        after = { 'copilot.vim', 'vim-vsnip' },
+        after = {
+            -- 'copilot.vim',
+            'vim-vsnip',
+        },
     }
+    -- completion sources
     use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
@@ -75,8 +80,8 @@ require('packer').startup(function(use)
             require('mason').setup()
         end,
     }
-    use {
-        'williamboman/mason-lspconfig.nvim', -- auto config lsp servers
+    use { -- auto config lsp servers
+        'williamboman/mason-lspconfig.nvim',
         config = function()
             require('plugins.mason-lspconfig')
         end,
@@ -97,7 +102,7 @@ require('packer').startup(function(use)
     use {
         'lervag/vimtex',
         config = function()
-            vim.opt.conceallevel = 2
+            -- vim.opt.conceallevel = 2
         end,
         ft = 'tex',
     }
@@ -148,7 +153,7 @@ require('packer').startup(function(use)
             })
         end,
     }
-    use {
+    use { -- directory viewer
         'nvim-tree/nvim-tree.lua',
         config = function()
             require('nvim-tree').setup({
@@ -179,8 +184,8 @@ require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter-textobjects'
     }
-    use {
-        'theHamsta/nvim-semantic-tokens', -- semantic highlighting
+    use { -- semantic highlighting
+        'theHamsta/nvim-semantic-tokens',
         after = 'nvim-treesitter',
         config = function()
             require('nvim-semantic-tokens').setup {
@@ -192,6 +197,33 @@ require('packer').startup(function(use)
                 --        highlight (a helper function that you can call (also multiple times) with the determined highlight group(s) as the only parameter)
                 highlighters = { require 'nvim-semantic-tokens.table-highlighter' }
             }
+        end,
+    }
+
+    -- modern folding
+    use {
+        'kevinhwang91/nvim-ufo',
+        requires = 'kevinhwang91/promise-async',
+        config = function()
+            vim.o.foldcolumn = '1' -- '0' is not bad
+            vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+            vim.o.foldlevelstart = 99
+            vim.o.foldenable = true
+
+            -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+            vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+            vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+
+            require('ufo').setup()
+            -- require('ufo').setup {
+            --     provider_selector = function(bufnr, filetype)
+            --         return {
+            --             -- 'lsp',
+            --             'treesitter',
+            --             'indent',
+            --         }
+            --     end,
+            -- }
         end,
     }
 
@@ -207,5 +239,34 @@ require('packer').startup(function(use)
     use { -- show and remove trailing whitespaces
         'jdhao/whitespace.nvim',
         event = 'VimEnter',
+    }
+    use { -- session manager
+        'Shatur/neovim-session-manager',
+        requires = { { 'nvim-lua/plenary.nvim' } },
+    }
+    use { -- macro manager
+        'svermeulen/vim-macrobatics',
+        requires = { { 'tpope/vim-repeat' } },
+        config = function()
+            vim.g.Mac_NamedMacrosDirectory = '~/.config/nvim/macrobatics'
+
+            vim.keymap.set('n', 'q', '<plug>(Mac_Play)', { nowait = true })
+            vim.keymap.set('n', 'gq', '<plug>(Mac_RecordNew)', { nowait = true })
+
+            vim.keymap.set('n', '<leader>mh', function() vim.cmd('DisplayMacroHistory') end)
+
+            vim.keymap.set('n', '[m', '<plug>(Mac_RotateBack)')
+            vim.keymap.set('n', ']m', '<plug>(Mac_RotateForward)')
+
+            -- move to three macros
+            vim.keymap.set('n', '<leader>mq', '"q<plug>(Mac_CopyCurrentMacroToRegister)')
+            vim.keymap.set('n', '<leader>mw', '"w<plug>(Mac_CopyCurrentMacroToRegister)')
+            vim.keymap.set('n', '<leader>me', '"e<plug>(Mac_CopyCurrentMacroToRegister)')
+
+            -- playback three macros
+            vim.keymap.set('n', 'QQ', '"q<plug>(Mac_Play)')
+            vim.keymap.set('n', 'QW', '"w<plug>(Mac_Play)')
+            vim.keymap.set('n', 'QE', '"e<plug>(Mac_Play)')
+        end,
     }
 end)

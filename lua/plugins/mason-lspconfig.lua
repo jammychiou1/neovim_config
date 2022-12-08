@@ -61,6 +61,11 @@ end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+
 -- latexindent config is complicated
 -- vim.fn.expand does not recognize '${HOME}'
 local latexindent_config_file = vim.fn.expand('$HOME/.config/nvim/indentSetting.yaml')
@@ -79,7 +84,6 @@ ml.setup_handlers({
         })
 
     end,
-
 
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:
