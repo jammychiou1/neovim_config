@@ -7,7 +7,23 @@ require('packer').startup(function(use)
 
     -- editing, movement and text objects
     use 'machakann/vim-sandwich' -- manipulating parentheses, brackets, quotes, etc.
-    use 'vim-scripts/ReplaceWithRegister' -- replace text object with register
+    -- use 'vim-scripts/ReplaceWithRegister' -- replace text object with register
+    use {
+        'gbprod/substitute.nvim',
+        config = function()
+
+            local substitute = require('substitute')
+            substitute.setup()
+
+            local set = vim.keymap.set;
+            set('n', 'r', substitute.operator)
+            set('n', 'rr', substitute.line)
+            set('x', 'r', substitute.visual)
+
+            set('n', 'R', 'r', { noremap = true })
+            set('x', 'R', 'r', { noremap = true })
+        end
+    }
     use { -- new delete operation
         'svermeulen/vim-cutlass',
         config = function()
@@ -243,16 +259,6 @@ require('packer').startup(function(use)
 
             vim.keymap.set('n', '[m', '<plug>(Mac_RotateBack)')
             vim.keymap.set('n', ']m', '<plug>(Mac_RotateForward)')
-
-            -- move to three macros
-            vim.keymap.set('n', '<leader>ma', '"a<plug>(Mac_CopyCurrentMacroToRegister)')
-            vim.keymap.set('n', '<leader>ms', '"s<plug>(Mac_CopyCurrentMacroToRegister)')
-            vim.keymap.set('n', '<leader>md', '"d<plug>(Mac_CopyCurrentMacroToRegister)')
-
-            -- playback three macros
-            vim.keymap.set('n', 'QA', '"a<plug>(Mac_Play)')
-            vim.keymap.set('n', 'QS', '"s<plug>(Mac_Play)')
-            vim.keymap.set('n', 'QD', '"d<plug>(Mac_Play)')
         end,
     }
 end)

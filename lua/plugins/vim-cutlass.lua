@@ -6,7 +6,7 @@ end
 
 -- normal mode
 noremap('n', {
-    ['x'] = 'd', -- x{motion}           => cut text highlighted {motion} highlighted over
+    ['x'] = 'd', -- x{motion}           => cut text over {motion}
     ['xx'] = 'dd', -- xx                => cut this line
     ['X'] = 'D', -- X                   => cut to end of line
 })
@@ -14,8 +14,4 @@ noremap('n', {
 -- visual mode
 noremap('x', {
     ['x'] = 'd', -- {Visual}x           => cut highlighted text
-})
-
-noremap('x', {
-    ['p'] = '"_c<C-r>"', -- {Visual}p   => replace highlighted text
 })

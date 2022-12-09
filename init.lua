@@ -33,10 +33,18 @@ vim.g.loaded_netrwPlugin = 1
 -- synchronize the unnamed register with the clipboard register
 opt.clipboard:prepend('unnamedplus')
 
-vim.keymap.set('n', '<leader>T', function() vim.cmd('terminal') end)
+-- fast spliting and tabbing
 vim.keymap.set('n', '<leader>v', function() vim.cmd('vsplit') end)
 vim.keymap.set('n', '<leader>s', function() vim.cmd('split') end)
 vim.keymap.set('n', '<leader>t', function() vim.cmd('tabnew') end)
 
+-- shortcut to open terminal
+vim.keymap.set('n', '<leader>T', function() vim.cmd('terminal') end)
+
+-- fast paste in insert mode
+vim.keymap.set('i', '<M-a>', '<C-o>p', { noremap = true })
+
 -- declare plugins and configure them
 require('plugins')
+
+require('atlreg').setup()
