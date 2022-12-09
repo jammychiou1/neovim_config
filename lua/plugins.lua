@@ -36,6 +36,14 @@ require('packer').startup(function(use)
             vim.api.nvim_set_keymap('t', '<C-j><C-j>', '<C-\\><C-n>', { noremap = true })
         end,
     }
+    use {
+        'abecodes/tabout.nvim',
+        config = function()
+            require('tabout').setup()
+        end,
+        wants = { 'nvim-treesitter' }, -- or require if not used so far
+        after = { 'nvim-cmp' } -- if a completion plugin is using tabs load it before
+    }
 
     -- file finding
     use {
