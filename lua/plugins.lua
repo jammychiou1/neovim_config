@@ -72,6 +72,7 @@ require('packer').startup(function(use)
     use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
     use { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' }
+    use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
 
     -- lsp stuff
     use { -- auto install lsp & other servers
@@ -175,10 +176,10 @@ require('packer').startup(function(use)
                 },
             }
 
-            local opt = vim.opt
+            -- local opt = vim.opt
 
-            opt.foldmethod = 'expr'
-            opt.foldexpr = 'nvim_treesitter#foldexpr()'
+            -- opt.foldmethod = 'expr'
+            -- opt.foldexpr = 'nvim_treesitter#foldexpr()'
         end,
     }
     use {
