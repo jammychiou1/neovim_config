@@ -150,7 +150,7 @@
 - <C-i>
     - redo jump
 - <C-j>
-    - line feed (seldom used)
+    - snippet next field
 - <C-k>
     - show signature
 - <C-l>
@@ -271,3 +271,7 @@
         - lsp format
     - <space>ca
         - lsp code action
+- <Tab>
+    - tabout
+- <S-Tab>
+    - tabout backward
