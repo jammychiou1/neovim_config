@@ -37,18 +37,10 @@ require('packer').startup(function(use)
         end,
     }
 
-    -- copilot
-    -- use {
-    --     'github/copilot.vim',
-    --     config = function()
-    --         require('plugins.copilot')
-    --     end,
-    -- }
-
     -- file finding
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        requires = { { 'nvim-lua/plenary.nvim' } }
+        requires = 'nvim-lua/plenary.nvim',
         -- remember to install ripgrep
     }
 
@@ -63,7 +55,6 @@ require('packer').startup(function(use)
             require('plugins.nvim-cmp')
         end,
         after = {
-            -- 'copilot.vim',
             'vim-vsnip',
         },
     }
@@ -175,11 +166,6 @@ require('packer').startup(function(use)
                     enable = false
                 },
             }
-
-            -- local opt = vim.opt
-
-            -- opt.foldmethod = 'expr'
-            -- opt.foldexpr = 'nvim_treesitter#foldexpr()'
         end,
     }
     use {
@@ -216,15 +202,6 @@ require('packer').startup(function(use)
             vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
             require('ufo').setup()
-            -- require('ufo').setup {
-            --     provider_selector = function(bufnr, filetype)
-            --         return {
-            --             -- 'lsp',
-            --             'treesitter',
-            --             'indent',
-            --         }
-            --     end,
-            -- }
         end,
     }
 
@@ -243,11 +220,11 @@ require('packer').startup(function(use)
     }
     use { -- session manager
         'Shatur/neovim-session-manager',
-        requires = { { 'nvim-lua/plenary.nvim' } },
+        requires = 'nvim-lua/plenary.nvim',
     }
     use { -- macro manager
         'svermeulen/vim-macrobatics',
-        requires = { { 'tpope/vim-repeat' } },
+        requires = 'tpope/vim-repeat',
         config = function()
             vim.g.Mac_NamedMacrosDirectory = '~/.config/nvim/macrobatics'
 
@@ -260,14 +237,14 @@ require('packer').startup(function(use)
             vim.keymap.set('n', ']m', '<plug>(Mac_RotateForward)')
 
             -- move to three macros
-            vim.keymap.set('n', '<leader>mq', '"q<plug>(Mac_CopyCurrentMacroToRegister)')
-            vim.keymap.set('n', '<leader>mw', '"w<plug>(Mac_CopyCurrentMacroToRegister)')
-            vim.keymap.set('n', '<leader>me', '"e<plug>(Mac_CopyCurrentMacroToRegister)')
+            vim.keymap.set('n', '<leader>ma', '"a<plug>(Mac_CopyCurrentMacroToRegister)')
+            vim.keymap.set('n', '<leader>ms', '"s<plug>(Mac_CopyCurrentMacroToRegister)')
+            vim.keymap.set('n', '<leader>md', '"d<plug>(Mac_CopyCurrentMacroToRegister)')
 
             -- playback three macros
-            vim.keymap.set('n', 'QQ', '"q<plug>(Mac_Play)')
-            vim.keymap.set('n', 'QW', '"w<plug>(Mac_Play)')
-            vim.keymap.set('n', 'QE', '"e<plug>(Mac_Play)')
+            vim.keymap.set('n', 'QA', '"a<plug>(Mac_Play)')
+            vim.keymap.set('n', 'QS', '"s<plug>(Mac_Play)')
+            vim.keymap.set('n', 'QD', '"d<plug>(Mac_Play)')
         end,
     }
 end)

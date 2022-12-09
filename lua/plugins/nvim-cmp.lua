@@ -20,18 +20,11 @@ cmp.setup({
   mapping = {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-h>'] = cmp.mapping.close(),
-    ['<C-j>'] = cmp.mapping.confirm({ select = true }),
-    -- ['<C-k>'] = cmp.mapping(function(fallback)
-    --   vim.api.nvim_feedkeys(
-    --     vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)),
-    --     'n', true)
-    -- end, { 'i', 's' }),
+    ['<C-e>'] = cmp.mapping.close(),
+    ['<C-y>'] = cmp.mapping.confirm({ select = false }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if vim.fn['vsnip#available'](1) == 1 then
         feedkey('<Plug>(vsnip-expand-or-jump)', '')
-      -- elseif has_words_before() then
-      --   cmp.complete()
       else
         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
@@ -57,9 +50,9 @@ cmp.setup.cmdline({ '/', '?' }, {
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = 'path' }
-  }, {
-    { name = 'cmdline' }
-  })
+  sources = {
+    { name = 'path' },
+    { name = 'cmdline' },
+    { name = 'buffer' },
+  }
 })

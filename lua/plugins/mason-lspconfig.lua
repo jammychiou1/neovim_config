@@ -45,16 +45,16 @@ local my_on_attach = function(client, bufnr)
 
     -- reference: https://github.com/theHamsta/nvim-semantic-tokens
     if caps.semanticTokensProvider and caps.semanticTokensProvider.full then
-      local augroup = vim.api.nvim_create_augroup('SemanticTokens', {})
-      vim.api.nvim_create_autocmd('TextChanged', {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.semantic_tokens_full()
-        end,
-      })
-      -- fire it first time on load as well
-      vim.lsp.buf.semantic_tokens_full()
+        local augroup = vim.api.nvim_create_augroup('SemanticTokens', {})
+        vim.api.nvim_create_autocmd('TextChanged', {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.semantic_tokens_full()
+            end,
+        })
+        -- fire it first time on load as well
+        vim.lsp.buf.semantic_tokens_full()
     end
 
 end
@@ -88,13 +88,11 @@ ml.setup_handlers({
     -- Next, you can provide a dedicated handler for specific servers.
     -- For example, a handler override for the `rust_analyzer`:
 
-    ['texlab'] = function ()
+    ['texlab'] = function()
 
         require('lspconfig').texlab.setup({
             capabilities = capabilities,
-            on_attach = my_on_attach,
-            settings = {
-                texlab = {
+            on_attach = my_on_attach, settings = { texlab = {
                     latexindent = {
                         ['local'] = latexindent_config_file,
                     },
