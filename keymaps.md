@@ -95,6 +95,7 @@
     - hop 2 char
 - S
     - change line (seldom used)
+    - surround (v mode)
 - t
     - find char (exclusive)
 - T
