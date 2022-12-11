@@ -261,4 +261,10 @@ require('packer').startup(function(use)
             vim.keymap.set('n', ']m', '<plug>(Mac_RotateForward)')
         end,
     }
+    use { -- show keymap
+        'folke/which-key.nvim',
+        config = function()
+            require('which-key').setup()
+        end
+    }
 end)
