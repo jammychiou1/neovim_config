@@ -193,7 +193,8 @@ require('packer').startup(function(use)
         end,
     }
     use {
-        'nvim-treesitter/nvim-treesitter-textobjects'
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        require = { 'nvim-treesitter' }, -- or require if not used so far
     }
     use { -- semantic highlighting
         'theHamsta/nvim-semantic-tokens',
