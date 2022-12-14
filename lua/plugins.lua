@@ -58,6 +58,7 @@ require('packer').startup(function(use)
             })
         end
     }
+    use 'wellle/targets.vim'
 
     -- file finding
     use {
@@ -193,6 +194,28 @@ require('packer').startup(function(use)
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
         require = { 'nvim-treesitter' }, -- or require if not used so far
+        config = function()
+            require 'nvim-treesitter.configs'.setup {
+                textobjects = {
+                    move = {
+                        enable = true,
+                        set_jumps = true, -- whether to set jumps in the jumplist
+                        goto_next_start = {
+                            [']]'] = { query = '@function.outer', desc = 'Next function start' },
+                        },
+                        goto_next_end = {
+                            [']['] = { query = '@function.outer', desc = 'Next function end' },
+                        },
+                        goto_previous_start = {
+                            ['[['] = { query = '@function.outer', desc = 'Previous function start' },
+                        },
+                        goto_previous_end = {
+                            ['[]'] = { query = '@function.outer', desc = 'Previous function end' },
+                        },
+                    },
+                },
+            }
+        end,
     }
     use { -- semantic highlighting
         'theHamsta/nvim-semantic-tokens',
