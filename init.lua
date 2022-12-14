@@ -44,6 +44,12 @@ vim.keymap.set('n', '<leader>T', function() vim.cmd('terminal') end)
 -- fast paste in insert mode
 vim.keymap.set('i', '<M-a>', '<C-o>p', { noremap = true })
 
+-- fast hjkl in insert mode
+vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true })
+vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true })
+vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true })
+vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true })
+
 -- declare plugins and configure them
 require('plugins')
 
