@@ -31,7 +31,6 @@ require('packer').startup(function(use)
             vim.api.nvim_command 'runtime macros/sandwich/keymap/surround.vim'
         end,
     }
-    use 'vim-scripts/argtextobj.vim' -- text objects for arguments
     use { -- easy motion
         'phaazon/hop.nvim',
         branch = 'v2', -- optional but strongly recommended
