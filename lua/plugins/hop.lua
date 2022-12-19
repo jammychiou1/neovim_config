@@ -5,7 +5,7 @@ hop.setup()
 
 -- remap s to sneak
 vim.keymap.set(
-    { 'n', 'v' },
+    { 'n', 'x' },
     's',
     function()
         hop.hint_char2()
@@ -23,7 +23,7 @@ vim.keymap.set(
 
 -- remap e to hop word
 vim.keymap.set(
-    { 'n', 'v', 'o' },
+    { 'n', 'x', 'o' },
     'e',
     function()
         hop.hint_words()
@@ -32,7 +32,7 @@ vim.keymap.set(
 
 -- remap E to hop line
 vim.keymap.set(
-    { 'n', 'v', 'o' },
+    { 'n', 'x', 'o' },
     'E',
     function()
         hop.hint_lines_skip_whitespace()
@@ -50,25 +50,46 @@ local before = {
     direction = hint.HintDirection.BEFORE_CURSOR,
     current_line_only = true,
 }
+local after_offset = {
+    direction = hint.HintDirection.AFTER_CURSOR,
+    current_line_only = true,
+    hint_offset = 1,
+    hint_position = require'hop.hint'.HintPosition.END
+}
 local after = {
     direction = hint.HintDirection.AFTER_CURSOR,
+    current_line_only = true,
+    hint_position = require'hop.hint'.HintPosition.END
+}
+local no_offset = {
+    current_line_only = true,
+}
+local offset = {
     current_line_only = true,
     hint_offset = 1,
     hint_position = require'hop.hint'.HintPosition.END
 }
 
 vim.keymap.set(
-    { 'n', 'i' },
+    { 'n', 'x', 'o' },
     '<Tab>',
     function()
-        hop.hint_patterns(after, re)
+        hop.hint_patterns(no_offset, re)
     end
 )
 
 vim.keymap.set(
-    { 'n', 'i' },
+    { 'i' },
+    '<Tab>',
+    function()
+        hop.hint_patterns(offset, re)
+    end
+)
+
+vim.keymap.set(
+    { 'n', 'x', 'o', 'i' },
     '<S-Tab>',
     function()
-        hop.hint_patterns(before, re)
+        hop.hint_patterns(no_offset, re)
     end
 )

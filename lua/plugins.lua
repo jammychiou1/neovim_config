@@ -189,7 +189,7 @@ require('packer').startup(function(use)
                     enable = false
                 },
             }
-        end,
+        end
     }
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
