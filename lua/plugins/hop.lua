@@ -1,5 +1,4 @@
 local hop = require('hop')
-local hint = require('hop.hint')
 
 hop.setup()
 
@@ -46,21 +45,6 @@ local dig_word = '[[:digit:]]\\+'
 local space_word = '[[:space:]]\\+'
 local re = punct .. bar .. alph_word .. bar .. dig_word .. bar .. space_word
 
-local before = {
-    direction = hint.HintDirection.BEFORE_CURSOR,
-    current_line_only = true,
-}
-local after_offset = {
-    direction = hint.HintDirection.AFTER_CURSOR,
-    current_line_only = true,
-    hint_offset = 1,
-    hint_position = require'hop.hint'.HintPosition.END
-}
-local after = {
-    direction = hint.HintDirection.AFTER_CURSOR,
-    current_line_only = true,
-    hint_position = require'hop.hint'.HintPosition.END
-}
 local no_offset = {
     current_line_only = true,
 }
@@ -92,4 +76,14 @@ vim.keymap.set(
     function()
         hop.hint_patterns(no_offset, re)
     end
+)
+
+-- make <C-i> work like original tab
+-- see https://neovim.io/news/2022/04#distinguishing-modifier-keys
+-- and http://www.leonerd.org.uk/hacks/fixterms/
+vim.keymap.set(
+    { 'i' },
+    '<C-i>',
+    '<Tab>',
+    { noremap = true }
 )

@@ -45,6 +45,8 @@ vim.keymap.set('n', '<leader>T', function() vim.cmd('terminal') end)
 vim.keymap.set('i', '<M-a>', '<C-o>p', { noremap = true })
 
 -- fast hjkl in insert mode
+-- see https://neovim.io/news/2022/04#distinguishing-modifier-keys
+-- and http://www.leonerd.org.uk/hacks/fixterms/
 vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true })
 vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true })
 vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true })
