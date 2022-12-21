@@ -6,7 +6,12 @@ require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
 
     -- editing, movement and text objects
-    use 'machakann/vim-sandwich' -- manipulating parentheses, brackets, quotes, etc.
+    use {
+        'machakann/vim-sandwich', -- manipulating parentheses, brackets, quotes, etc.
+        config = function()
+            vim.api.nvim_command 'runtime macros/sandwich/keymap/surround.vim'
+        end
+    }
     use {
         'gbprod/substitute.nvim',
         config = function()
@@ -27,7 +32,6 @@ require('packer').startup(function(use)
         'svermeulen/vim-cutlass',
         config = function()
             require('plugins.vim-cutlass')
-            vim.api.nvim_command 'runtime macros/sandwich/keymap/surround.vim'
         end,
     }
     use { -- easy motion
@@ -68,25 +72,38 @@ require('packer').startup(function(use)
     }
 
     -- snippets
-    use 'hrsh7th/vim-vsnip' -- snippet engine
-    use 'rafamadriz/friendly-snippets' -- useful snippets
+    use 'L3MON4D3/LuaSnip' -- snippet engine
+    -- use 'rafamadriz/friendly-snippets' -- useful snippets
 
     -- auto completion
     use { -- completion engine
         'hrsh7th/nvim-cmp',
+        after = 'LuaSnip',
         config = function()
             require('plugins.nvim-cmp')
         end,
-        after = {
-            'vim-vsnip',
-        },
     }
     -- completion sources
-    use { 'hrsh7th/cmp-nvim-lsp', after = 'nvim-cmp' }
-    use { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' }
-    use { 'hrsh7th/cmp-path', after = 'nvim-cmp' }
-    use { 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' }
-    use { 'hrsh7th/cmp-nvim-lsp-signature-help', after = 'nvim-cmp' }
+    use {
+        'hrsh7th/cmp-nvim-lsp',
+        after = 'nvim-cmp',
+    }
+    use {
+        'hrsh7th/cmp-buffer',
+        after = 'nvim-cmp',
+    }
+    use {
+        'hrsh7th/cmp-path',
+        after = 'nvim-cmp',
+    }
+    use {
+        'hrsh7th/cmp-nvim-lsp-signature-help',
+        after = 'nvim-cmp',
+    }
+    use {
+        'saadparwaiz1/cmp_luasnip',
+        after = 'nvim-cmp',
+    }
 
     -- lsp stuff
     use { -- auto install lsp & other servers
@@ -97,29 +114,25 @@ require('packer').startup(function(use)
     }
     use { -- auto config lsp servers
         'williamboman/mason-lspconfig.nvim',
+        after = 'mason.nvim',
         config = function()
             require('plugins.mason-lspconfig')
         end,
-        after = {
-            'mason.nvim',
-            'nvim-lspconfig',
-        },
     }
     use {
         'neovim/nvim-lspconfig',
         config = function()
             require('plugins.nvim-lspconfig')
         end,
-        after = 'cmp-nvim-lsp',
     }
 
     -- latex stuff
     use {
         'lervag/vimtex',
+        ft = 'tex',
         config = function()
             -- vim.opt.conceallevel = 2
         end,
-        ft = 'tex',
     }
 
     -- markdown stuff
@@ -184,7 +197,7 @@ require('packer').startup(function(use)
             require('nvim-treesitter.install').update({ with_sync = true })
         end,
         config = function()
-            require 'nvim-treesitter.configs'.setup {
+            require('nvim-treesitter.configs').setup {
                 highlight = {
                     enable = false
                 },
@@ -193,9 +206,9 @@ require('packer').startup(function(use)
     }
     use {
         'nvim-treesitter/nvim-treesitter-textobjects',
-        require = { 'nvim-treesitter' }, -- or require if not used so far
+        after = 'nvim-treesitter',
         config = function()
-            require 'nvim-treesitter.configs'.setup {
+            require('nvim-treesitter.configs').setup {
                 textobjects = {
                     move = {
                         enable = true,
@@ -250,7 +263,6 @@ require('packer').startup(function(use)
             require('ufo').setup()
         end,
     }
-
     -- other
     use { -- switch to English when leaving insert mode
         'lilydjwg/fcitx.vim',
@@ -260,10 +272,7 @@ require('packer').startup(function(use)
         ft = { 'tex', 'markdown' },
     }
     use 'matveyt/vim-opera' -- range commands apply to part of line
-    use { -- show and remove trailing whitespaces
-        'jdhao/whitespace.nvim',
-        event = 'VimEnter',
-    }
+    use  'jdhao/whitespace.nvim' -- show and remove trailing whitespaces
     use { -- session manager
         'Shatur/neovim-session-manager',
         requires = 'nvim-lua/plenary.nvim',

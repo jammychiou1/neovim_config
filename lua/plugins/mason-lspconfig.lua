@@ -11,6 +11,8 @@ ml.setup({
     },
 })
 
+-- TODO: move the following to nvim-lspconfig.lua
+
 -- reference: https://github.com/jdhao/nvim-config/blob/master/lua/config/lsp.lua
 --            :help mason-lspconfig.setup_handlers()
 
@@ -59,16 +61,16 @@ local my_on_attach = function(client, bufnr)
 
 end
 
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
+local function generate_capabilities()
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-capabilities.textDocument.foldingRange = {
-    dynamicRegistration = false,
-    lineFoldingOnly = true
-}
+    capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+    }
 
--- latexindent config is complicated
--- vim.fn.expand does not recognize '${HOME}'
-local latexindent_config_file = vim.fn.expand('$HOME/.config/nvim/indentSetting.yaml')
+    return capabilities
+end
 
 ml.setup_handlers({
 
@@ -79,7 +81,7 @@ ml.setup_handlers({
     function(server_name) -- default handler (optional)
 
         require('lspconfig')[server_name].setup({
-            capabilities = capabilities,
+            capabilities = generate_capabilities(),
             on_attach = my_on_attach,
         })
 
@@ -91,10 +93,14 @@ ml.setup_handlers({
     ['texlab'] = function()
 
         require('lspconfig').texlab.setup({
-            capabilities = capabilities,
-            on_attach = my_on_attach, settings = { texlab = {
+            capabilities = generate_capabilities(),
+            on_attach = my_on_attach,
+            settings = {
+                texlab = {
                     latexindent = {
-                        ['local'] = latexindent_config_file,
+                        -- latexindent config is complicated
+                        -- vim.fn.expand does not recognize '${HOME}'
+                        ['local'] = vim.fn.expand('$HOME/.config/nvim/indentSetting.yaml')
                     },
                 },
             },

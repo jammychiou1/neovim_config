@@ -1,41 +1,42 @@
 local cmp = require('cmp')
+local luasnip = require('luasnip')
 
-local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
-
--- reference: https://github.com/community/community/discussions/29817
 cmp.setup({
     snippet = {
         -- REQUIRED - you must specify a snippet engine
         expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+            luasnip.lsp_expand(args.body) -- For luasnip users.
         end,
     },
     mapping = {
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
-        ['<C-y>'] = cmp.mapping.confirm({ select = false }),
-        ['<C-tab>'] = cmp.mapping(function(fallback)
-            if vim.fn['vsnip#available'](1) == 1 then
-                feedkey('<Plug>(vsnip-expand-or-jump)', '')
+        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+        ['<C-y>'] = cmp.mapping(function(fallback)
+            local entry = cmp.get_active_entry()
+            if entry and entry.completion_item.insertTextFormat == cmp.lsp.InsertTextFormat.Snippet then
+                cmp.confirm({ select = false })
+            elseif luasnip.jumpable(1) then
+                luasnip.jump(1)
             else
-                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<C-j>`.
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<C-e>'] = cmp.mapping(function(fallback)
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
             end
         end, { 'i', 's' }),
     },
-    sources = {
+    sources = cmp.config.sources({
         { name = 'nvim_lsp' },
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'vsnip' },
+        { name = 'luasnip' },
         { name = 'nvim_lsp_signature_help' },
-    },
+        { name = 'path' },
+    }, {
+        { name = 'buffer' }
+    }),
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
