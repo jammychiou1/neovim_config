@@ -160,7 +160,7 @@ require('packer').startup(function(use)
                 },
                 groups = {
                     carbonfox = {
-                        ['@parameter'] = { link = "@field" },
+                        ['@parameter'] = { link = "@variable" },
                     }
                 }
             }
