@@ -151,10 +151,46 @@ require('packer').startup(function(use)
         'EdenEast/nightfox.nvim',
         config = function()
             require('nightfox').setup {
+                specs = {
+                    carbonfox = {
+                        syntax = {
+                            field = "#7dd759"
+                        }
+                    }
+                },
+                groups = {
+                    carbonfox = {
+                        ['@parameter'] = { link = "@field" },
+                    }
+                }
             }
             vim.api.nvim_command('colorscheme carbonfox')
         end
     }
+    -- for future reference
+    -- require('nightfox').setup {
+    --     palettes = {
+    --         carbonfox = {
+    --             -- yellow = { base = "#ccbb53", bright = "#e0d697", dim = "#8e823a" },
+    --             -- orange = { base = "#e78d28", bright = "#f0ba7e", dim = "#a1621c" },
+    --         }
+    --     },
+    --     specs = {
+    --         carbonfox = {
+    --             syntax = {
+    --                 field = "#7dd759"
+    --             }
+    --         }
+    --     },
+    --     groups = {
+    --         carbonfox = {
+    --             -- Structure = { fg = '#64648c' },
+    --             -- ['@field'] = { fg = 'palette.yellow.bright' },
+    --             -- ['@parameter'] = { fg = '#e499bd' },
+    --             ['@parameter'] = { link = "@field" },
+    --         }
+    --     }
+    -- }
     use { -- fancy statusline, remember to install patch fonts https://www.nerdfonts.com/#home
         'nvim-lualine/lualine.nvim',
         after = 'nightfox.nvim',
@@ -223,21 +259,6 @@ require('packer').startup(function(use)
             }
         end,
     }
-    -- use { -- semantic highlighting
-    --     'theHamsta/nvim-semantic-tokens',
-    --     after = 'nvim-treesitter',
-    --     config = function()
-    --         require('nvim-semantic-tokens').setup {
-    --             preset = 'default',
-    --             -- highlighters is a list of modules following the interface of nvim-semantic-tokens.table-highlighter or
-    --             -- function with the signature: highlight_token(ctx, token, highlight) where
-    --             --        ctx (as defined in :h lsp-handler)
-    --             --        token  (as defined in :h vim.lsp.semantic_tokens.on_full())
-    --             --        highlight (a helper function that you can call (also multiple times) with the determined highlight group(s) as the only parameter)
-    --             highlighters = { require 'nvim-semantic-tokens.table-highlighter' }
-    --         }
-    --     end,
-    -- }
 
     -- modern folding
     use {
