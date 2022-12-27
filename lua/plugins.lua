@@ -147,38 +147,30 @@ require('packer').startup(function(use)
 
     -- fancy visuals
     use 'kyazdani42/nvim-web-devicons' -- icons
-    use { -- colorscheme
-        'catppuccin/nvim',
-        as = 'catppuccin',
+    use {
+        'EdenEast/nightfox.nvim',
         config = function()
-            require('catppuccin').setup {
-                flavour = 'macchiato',
-                integrations = {
-                    semantic_tokens = true,
-                },
+            require('nightfox').setup {
             }
-            vim.api.nvim_command 'colorscheme catppuccin'
+            vim.api.nvim_command('colorscheme carbonfox')
         end
     }
     use { -- fancy statusline, remember to install patch fonts https://www.nerdfonts.com/#home
         'nvim-lualine/lualine.nvim',
+        after = 'nightfox.nvim',
         config = function()
-            require('lualine').setup({
-                options = {
-                    theme = 'catppuccin',
-                },
-            })
+            require('lualine').setup()
         end,
     }
     use { -- fancy buffer line
         'akinsho/bufferline.nvim',
+        after = 'nightfox.nvim',
         tag = 'v3.*',
         config = function()
             require('bufferline').setup({
                 options = {
                     mode = 'tabs',
                 },
-                highlights = require('catppuccin.groups.integrations.bufferline').get(),
             })
         end,
     }
@@ -231,21 +223,21 @@ require('packer').startup(function(use)
             }
         end,
     }
-    use { -- semantic highlighting
-        'theHamsta/nvim-semantic-tokens',
-        after = 'nvim-treesitter',
-        config = function()
-            require('nvim-semantic-tokens').setup {
-                preset = 'default',
-                -- highlighters is a list of modules following the interface of nvim-semantic-tokens.table-highlighter or
-                -- function with the signature: highlight_token(ctx, token, highlight) where
-                --        ctx (as defined in :h lsp-handler)
-                --        token  (as defined in :h vim.lsp.semantic_tokens.on_full())
-                --        highlight (a helper function that you can call (also multiple times) with the determined highlight group(s) as the only parameter)
-                highlighters = { require 'nvim-semantic-tokens.table-highlighter' }
-            }
-        end,
-    }
+    -- use { -- semantic highlighting
+    --     'theHamsta/nvim-semantic-tokens',
+    --     after = 'nvim-treesitter',
+    --     config = function()
+    --         require('nvim-semantic-tokens').setup {
+    --             preset = 'default',
+    --             -- highlighters is a list of modules following the interface of nvim-semantic-tokens.table-highlighter or
+    --             -- function with the signature: highlight_token(ctx, token, highlight) where
+    --             --        ctx (as defined in :h lsp-handler)
+    --             --        token  (as defined in :h vim.lsp.semantic_tokens.on_full())
+    --             --        highlight (a helper function that you can call (also multiple times) with the determined highlight group(s) as the only parameter)
+    --             highlighters = { require 'nvim-semantic-tokens.table-highlighter' }
+    --         }
+    --     end,
+    -- }
 
     -- modern folding
     use {
