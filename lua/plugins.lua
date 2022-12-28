@@ -148,59 +148,60 @@ require('packer').startup(function(use)
     -- fancy visuals
     use 'kyazdani42/nvim-web-devicons' -- icons
     use {
-        'EdenEast/nightfox.nvim',
-        config = function()
-            require('nightfox').setup {
-                specs = {
-                    carbonfox = {
-                        syntax = {
-                            field = "#7dd759"
-                        }
-                    }
+        'catppuccin/nvim',
+        as = 'catppuccin',
+        config = function ()
+            -- ref: https://github.com/nullchilly/nvim/blob/nvim/lua/config/catppuccin.lua
+            require('catppuccin').setup({
+                flavour = 'mocha', -- latte, frappe, macchiato, mocha
+                term_colors = true,
+                transparent_background = false,
+                no_italic = false,
+                no_bold = false,
+                styles = {
+                    comments = {},
+                    conditionals = {},
+                    loops = {},
+                    functions = {},
+                    keywords = {},
+                    strings = {},
+                    variables = {},
+                    numbers = {},
+                    booleans = {},
+                    properties = {},
+                    types = {},
                 },
-                groups = {
-                    carbonfox = {
-                        ['@parameter'] = { link = "@variable" },
-                    }
-                }
-            }
-            vim.api.nvim_command('colorscheme carbonfox')
+                color_overrides = {
+                    mocha = {
+                        base = '#000000',
+                    },
+                },
+                highlight_overrides = {
+                    mocha = function(C)
+                        return {
+                            TabLineSel = { bg = C.pink },
+                            NvimTreeNormal = { bg = C.none },
+                            CmpBorder = { fg = C.surface2 },
+                            Pmenu = { bg = C.none },
+                            NormalFloat = { bg = C.none },
+                            TelescopeBorder = { link = 'FloatBorder' },
+                        }
+                    end,
+                },
+            })
+            vim.cmd.colorscheme('catppuccin')
         end
     }
-    -- for future reference
-    -- require('nightfox').setup {
-    --     palettes = {
-    --         carbonfox = {
-    --             -- yellow = { base = "#ccbb53", bright = "#e0d697", dim = "#8e823a" },
-    --             -- orange = { base = "#e78d28", bright = "#f0ba7e", dim = "#a1621c" },
-    --         }
-    --     },
-    --     specs = {
-    --         carbonfox = {
-    --             syntax = {
-    --                 field = "#7dd759"
-    --             }
-    --         }
-    --     },
-    --     groups = {
-    --         carbonfox = {
-    --             -- Structure = { fg = '#64648c' },
-    --             -- ['@field'] = { fg = 'palette.yellow.bright' },
-    --             -- ['@parameter'] = { fg = '#e499bd' },
-    --             ['@parameter'] = { link = "@field" },
-    --         }
-    --     }
-    -- }
     use { -- fancy statusline, remember to install patch fonts https://www.nerdfonts.com/#home
         'nvim-lualine/lualine.nvim',
-        after = 'nightfox.nvim',
+        after = 'catppuccin',
         config = function()
             require('lualine').setup()
         end,
     }
     use { -- fancy buffer line
         'akinsho/bufferline.nvim',
-        after = 'nightfox.nvim',
+        after = 'catppuccin',
         tag = 'v3.*',
         config = function()
             require('bufferline').setup({
