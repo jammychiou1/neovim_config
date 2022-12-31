@@ -22,16 +22,7 @@ local my_on_attach = function(client, bufnr)
     local lsp = vim.lsp
 
     buf_map('n', {
-        ['gD'] = function() vim.cmd('tab split'); vim.lsp.buf.declaration() end, -- go to declaration
-        ['gd'] = function() vim.cmd('tab split'); vim.lsp.buf.definition() end, -- go to definition
-        -- ['gD'] = lsp.buf.declaration, -- go to declaration
-        -- ['gd'] = lsp.buf.definition, -- go to definition
-        -- ['gi'] = lsp.buf.implementation, -- go to implementation
-        -- ['gR'] = lsp.buf.references, -- show references
-        ['K'] = vim.lsp.buf.hover, -- show hover
-        ['<C-k>'] = lsp.buf.signature_help, -- hint function signature
-        ['<space>rn'] = lsp.buf.rename, -- rename variable
-        ['<space>ca'] = lsp.buf.code_action, -- code action
+        -- ['<C-k>'] = lsp.buf.signature_help, -- hint function signature
     })
 
     local caps = client.server_capabilities

@@ -2,23 +2,23 @@ local hop = require('hop')
 
 hop.setup()
 
--- remap s to sneak
-vim.keymap.set(
-    { 'n', 'x' },
-    's',
-    function()
-        hop.hint_char2()
-    end
-)
-
--- remap z to sneak for operator mode
-vim.keymap.set(
-    { 'o' },
-    'z',
-    function()
-        hop.hint_char2()
-    end
-)
+-- -- remap s to sneak
+-- vim.keymap.set(
+--     { 'n', 'x' },
+--     's',
+--     function()
+--         hop.hint_char2()
+--     end
+-- )
+--
+-- -- remap z to sneak for operator mode
+-- vim.keymap.set(
+--     { 'o' },
+--     'z',
+--     function()
+--         hop.hint_char2()
+--     end
+-- )
 
 -- remap e to hop word
 vim.keymap.set(
@@ -51,7 +51,7 @@ local no_offset = {
 local offset = {
     current_line_only = true,
     hint_offset = 1,
-    hint_position = require'hop.hint'.HintPosition.END
+    hint_position = require 'hop.hint'.HintPosition.END
 }
 
 vim.keymap.set(
