@@ -6,6 +6,8 @@ opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 
+opt.guifont = 'VictorMono Nerd Font:h10'
+
 -- side number settings
 opt.number = true
 opt.relativenumber = true

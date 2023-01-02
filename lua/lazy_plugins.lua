@@ -189,6 +189,16 @@ require("lazy").setup({
             })
         end,
     },
+    {
+      "startup-nvim/startup.nvim",
+      dependencies = {
+          "nvim-telescope/telescope.nvim",
+          "nvim-lua/plenary.nvim"
+      },
+      config = function()
+        require"startup".setup({ theme = "dashboard" })
+      end
+    },
     { -- cfg syntax parsing
         'nvim-treesitter/nvim-treesitter',
         build = function()
@@ -295,6 +305,12 @@ require("lazy").setup({
         tag = '0.1.0',
         dependencies = { 'nvim-lua/plenary.nvim' },
         cmd = "Telescope",
+        keys = {
+            { "<leader>ff", require('telescope.builtin').find_files, mode = "n", desc = "Find files" },
+            { "<leader>fg", require('telescope.builtin').live_grep, mode = "n", desc = "Live grep" },
+            { "<leader>fb", require('telescope.builtin').buffers, mode = "n", desc = "Find buffer" },
+            { "<leader>fh", require('telescope.builtin').help_tags, mode = "n", desc = "Find help tags" },
+        },
     },
 
     -- auto completion
@@ -345,6 +361,9 @@ require("lazy").setup({
 
             saga.init_lsp_saga({
                 code_action_icon = "",
+                code_action_lightbulb = {
+                    sign = false
+                }
             })
 
             -- Lsp finder find the symbol definition implement reference
@@ -357,7 +376,7 @@ require("lazy").setup({
             keymap({ "n", "v" }, "<space>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
 
             -- Rename
-            keymap("n", "<space>r", "<cmd>Lspsaga rename<CR>", { silent = true })
+            keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
 
             -- Peek Definition
             -- you can edit the definition file in this flaotwindow
@@ -384,7 +403,7 @@ require("lazy").setup({
             -- end, { silent = true })
 
             -- Outline
-            keymap("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", { silent = true })
+            keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", { silent = true })
 
             -- Hover Doc
             keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
@@ -458,6 +477,9 @@ require("lazy").setup({
     { -- session manager
         'Shatur/neovim-session-manager',
         dependencies = { 'nvim-lua/plenary.nvim' },
+        config = {
+            autoload_mode = require('session_manager.config').AutoloadMode.Disabled
+        }
     },
     { -- macro manager
         'svermeulen/vim-macrobatics',
