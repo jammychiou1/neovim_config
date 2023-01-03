@@ -217,6 +217,11 @@ require("lazy").setup({
     { -- manipulating parentheses, brackets, quotes, etc.
         'machakann/vim-sandwich',
         init = function()
+            vim.g.sandwich_no_default_key_mappings = 1
+            vim.g.operator_sandwich_no_default_key_mappings = 1
+            vim.g.textobj_sandwich_no_default_key_mappings = 1
+        end,
+        config = function()
             vim.api.nvim_command 'runtime macros/sandwich/keymap/surround.vim'
         end
     },
