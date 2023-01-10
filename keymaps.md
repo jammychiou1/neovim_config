@@ -15,7 +15,7 @@
 - d
     - delete
     - ds
-        - add surround
+        - delete surround
 - D
     - delete to end of line
 - e
@@ -25,15 +25,17 @@
 - f
     - find char (inclusive)
 - F
-    - backward find char (inclusive)
+    - backward find char (inclusive) (seldom used)
 - g
     - gg
         - start of file gd
         - go to definition
     - gD
-        - go to declaration
-    - gR
-        - go to reference
+        - peek declaration
+    - gr
+        - peek reference
+    - gh
+        - lsp find
     - gq
         - record macro
     - ge
@@ -42,12 +44,14 @@
         - paste after without moving cursor (seldom used)
     - gP
         - paste before without moving cursor (seldom used)
+    - gJ
+        - join line without space
 - G
     - end of file
 - h
     - left
 - H
-    - top of view (seldom used)
+    - start of line
 - i
     - insert
 - I
@@ -63,7 +67,7 @@
 - l
     - right
 - L
-    - bottom of view (seldom used)
+    - end of line
 - m
     - mark location (seldom used)
 - M
@@ -83,23 +87,20 @@
 - q
     - apply macro
 - Q
-    - apply three macros
-    - QA
-    - QS
-    - QD
+    - (never used)
 - r
-    - replace a char (seldom used)
+    - replace a char
 - R
     - replace mode
 - s
-    - hop 2 char
+    - substitute
 - S
-    - change line (seldom used)
+    - substitute line
     - surround (v mode)
 - t
     - find char (exclusive)
 - T
-    - find char backward (exclusive)
+    - find char backward (exclusive) (seldom used)
 - u
     - undo
 - U
@@ -123,6 +124,8 @@
 - Y
     - copy to end of line
 - z
+    - za
+        - toggle fold
     - zz
         - center screen
 - Z
@@ -138,23 +141,26 @@
     - exit insert mode (seldom used)
 - <C-d>
     - scroll half screen down
+    - shift left in i mode
 - <C-e>
     - scroll one line down (nmode) (seldom used)
-    - close completion
+    - snippet previous field
 - <C-f>
     - scroll one screen down (seldom used)
 - <C-g>
     - show file location percentage (seldom used)
 - <C-h>
-    - backspace (seldom used)
+    - left in i mode
 - <C-i>
+    - add tab
     - redo jump
 - <C-j>
-    - snippet next field
+    - down in i mode
 - <C-k>
-    - show signature
+    - up in i mode
 - <C-l>
     - clear highlight
+    - right in i mode
 - <C-m>
     - carriage return (seldom used)
 - <C-n>
@@ -172,18 +178,25 @@
 - <C-s>
     - (never used)
 - <C-t>
-    - (never used)
+    - shift right in i mode
 - <C-u>
     - scroll half screen up
 - <C-v>
     - block visual
 - <C-w>
-    - switch pane
+    - <C-w> h/j/k/l
+        - switch window
+    - <C-w> s
+        - split horizontally
+    - <C-w> v
+        - split vertically
+    - <C-w> q
+        - close window
 - <C-x>
     - decrease number (n mode)
 - <C-y>
     - scroll one line up (nmode) (seldom used)
-    - confirm completion
+    - expand snippet or snippet next field
 - <C-z>
     - (never used)
 - ~
@@ -199,7 +212,7 @@
 - %
     - jump to matching parenthesis
 - ^
-    - first non-space char
+    - first non-space char (seldom used)
 - &
     - (never used)
 - *
@@ -209,11 +222,11 @@
 - )
     - (never used)
 - -
-    - first non-space char of previous line
+    - first non-space char of previous line (seldom used)
 - _
-    - first non-space char
+    - first non-space char (seldom used)
 - +
-    - first non-space char of next line
+    - first non-space char of next line (seldom used)
 - =
     - retab (seldom used)
 - [m
@@ -227,7 +240,7 @@
 - ;
     - repeat fFtT command (seldom used)
 - '
-    - select register (remapped to ")
+    - goto marks (seldom used)
 - "
     - select register
 - \
@@ -238,20 +251,24 @@
         - preview latex pdf
     - \lc
         - clear latex auxiliary files
-    - \T
-        - terminal
-    - \t
-        - new tabe
-    - \v
-        - vsplit
-    - \s
-        - split
     - \mh
         - macro history
-    - set three macros
-        - \ma
-        - \ms
-        - \md
+    - \ff
+        - find file
+    - \fg
+        - live grep
+    - \fb
+        - find buffer
+    - \fh
+        - find help tag
+    - \o
+        - lsp outline
+    - \cd
+        - show cursor diagnostic
+    - \tt
+        - open terminal in new tab
+    - \tv
+        - open terminal in new vertical split
 - |
     - (never used)
 - ,
@@ -264,6 +281,8 @@
     - repeat last command
 - /
     - search forward
+    - //
+        - search last pattern
 - ?
     - search backward
 - <space>
@@ -271,7 +290,13 @@
         - lsp format
     - <space>ca
         - lsp code action
+    - <space>rn
+        - lsp rename
 - <Tab>
-    - tabout
+    - jump to start of every "block" in line
 - <S-Tab>
-    - tabout backward
+    - jump to end of every "block" in line
+- <M-*>
+    - M means alt key in normal keyboards
+- <M-a>
+    - fast paste

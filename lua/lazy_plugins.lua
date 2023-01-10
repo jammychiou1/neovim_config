@@ -53,6 +53,7 @@ require("lazy").setup({
                             NvimTreeNormal = { bg = '#080808' },
                             NvimTreeEndOfBuffer = { bg = '#080808', fg = '#080808' },
                             Pmenu = { bg = C.mantle },
+                            LspSagaLightBulb = { fg = C.yellow },
                         }
                     end,
                 },
@@ -383,6 +384,9 @@ require("lazy").setup({
             -- Rename
             keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
 
+            -- Format
+            keymap("n", "<space>f", vim.lsp.buf.format)
+
             -- Peek Definition
             -- you can edit the definition file in this flaotwindow
             -- also support open/vsplit/etc operation check definition_action_keys
@@ -413,11 +417,11 @@ require("lazy").setup({
             -- Hover Doc
             keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
 
-            -- Float terminal
-            keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
+            -- -- Float terminal
+            -- keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
 
-            -- close floaterm
-            keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+            -- -- Close float terminal
+            -- keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
         end,
     },
     { -- auto install lsp & other servers

@@ -5,22 +5,23 @@ Inspired by [jdhao/nvim-config](https://github.com/jdhao/nvim-config).
 ## Features
 
 This project aims to configure NeoVim to become a powerful code editor, with the following features:
-- Syntatical (based on treesitter) and semantical (based on lsp semantic token) highlighting
-- Copilot intergration
-- Auto completion
-- Easy lsp installation and settings with mason
-- Convenient editing / movement shortcuts
-- Fancy colorscheme (catppuccin) and status line (lualine, bufferline)
-- Directory viewer (nvim-tree)
+- Convenient editing / movement keymaps
+- Plugin management with Lazy.nvim
+- Fancy UI (lualine, bufferline, nvim-tree) and colorscheme (custom catppuccin flavour based on [Amoled](https://github.com/nullchilly/nvim/blob/nvim/lua/config/catppuccin.lua))
+- Fast file finding with telescope.nvim
 - LaTeX / Markdown previewer (vimtex, markdown-preview)
+- Easy language server installation with mason
+- Powerful LSP utilities with lspsaga
+- Modern folds with nvim-ufo
+- Auto completion with nvim-cmp
+- Snippets with luasnip
+- Syntatical (based on treesitter) and semantical (based on lsp semantic token) highlighting
 - ...And more
 
 ## Installing
 
 - Install neovim >= 0.9 for semantic tokens
 - Clone this repo to `~/.config/nvim/`
-- Download packer.nvim to `~/.local/share/nvim/site/pack/packer/start/`
-- Run `:PackerInstall`
 
 ## Screenshots
 
