@@ -16,6 +16,7 @@ This project aims to configure NeoVim to become a powerful code editor, with the
 - Auto completion with nvim-cmp
 - Snippets with luasnip
 - Syntatical (based on treesitter) and semantical (based on lsp semantic token) highlighting
+- Session management with neovim-session-manager
 - ...And more
 
 ## Installing

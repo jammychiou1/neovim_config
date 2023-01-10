@@ -191,27 +191,37 @@ require("lazy").setup({
         end,
     },
     {
-      "startup-nvim/startup.nvim",
-      dependencies = {
-          "nvim-telescope/telescope.nvim",
-          "nvim-lua/plenary.nvim"
-      },
-      config = function()
-        require"startup".setup({ theme = "dashboard" })
-      end
+        "startup-nvim/startup.nvim",
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+            "nvim-lua/plenary.nvim"
+        },
+        config = function()
+            require "startup".setup({ theme = "dashboard" })
+        end
     },
-    { -- cfg syntax parsing
+    { -- syntax parsing, remember to install treesitter-cli
         'nvim-treesitter/nvim-treesitter',
         build = function()
             require('nvim-treesitter.install').update({ with_sync = true })
         end,
         config = function()
             require('nvim-treesitter.configs').setup({
-                highlight = {
-                    enable = false
-                },
+                ensure_installed = { "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "latex", "javascript", "html", "verilog" },
+                auto_install = true,
             })
         end
+    },
+    {
+        'mrjones2014/nvim-ts-rainbow',
+        dependencies = { 'nvim-treesitter' },
+        config = function()
+            require('nvim-treesitter.configs').setup {
+                rainbow = {
+                    enable = true,
+                }
+            }
+        end,
     },
 
     -- editing, movement and text objects
@@ -229,10 +239,10 @@ require("lazy").setup({
     { -- replace with register
         'gbprod/substitute.nvim',
         keys = {
-            { "s", require('substitute').operator, mode = "n", desc = "Substitute" },
-            { "ss", require('substitute').operator, mode = "n", desc = "Substitute" },
-            { "S", require('substitute').eol, mode = "n", desc = "Substitute" },
-            { "s", require('substitute').visual, mode = "x", desc = "Substitute" },
+            { "s", function() require('substitute').operator() end, mode = "n", desc = "Substitute" },
+            { "ss", function() require('substitute').operator() end, mode = "n", desc = "Substitute" },
+            { "S", function() require('substitute').eol() end, mode = "n", desc = "Substitute" },
+            { "s", function() require('substitute').visual() end, mode = "x", desc = "Substitute" },
         },
         config = function()
             require('substitute').setup()
@@ -274,7 +284,7 @@ require("lazy").setup({
     },
     {
         'windwp/nvim-autopairs',
-        config = { fast_wrap = {} }
+        opts = { fast_wrap = {} }
     },
     'wellle/targets.vim',
     -- {
@@ -312,10 +322,10 @@ require("lazy").setup({
         dependencies = { 'nvim-lua/plenary.nvim' },
         cmd = "Telescope",
         keys = {
-            { "<leader>ff", require('telescope.builtin').find_files, mode = "n", desc = "Find files" },
-            { "<leader>fg", require('telescope.builtin').live_grep, mode = "n", desc = "Live grep" },
-            { "<leader>fb", require('telescope.builtin').buffers, mode = "n", desc = "Find buffer" },
-            { "<leader>fh", require('telescope.builtin').help_tags, mode = "n", desc = "Find help tags" },
+            { "<leader>ff", function() require('telescope.builtin').find_files() end, mode = "n", desc = "Find files" },
+            { "<leader>fg", function() require('telescope.builtin').live_grep() end, mode = "n", desc = "Live grep" },
+            { "<leader>fb", function() require('telescope.builtin').buffers() end, mode = "n", desc = "Find buffer" },
+            { "<leader>fh", function() require('telescope.builtin').help_tags() end, mode = "n", desc = "Find help tags" },
         },
     },
 
@@ -383,9 +393,6 @@ require("lazy").setup({
 
             -- Rename
             keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
-
-            -- Format
-            keymap("n", "<space>f", vim.lsp.buf.format)
 
             -- Peek Definition
             -- you can edit the definition file in this flaotwindow
@@ -486,9 +493,11 @@ require("lazy").setup({
     { -- session manager
         'Shatur/neovim-session-manager',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        config = {
-            autoload_mode = require('session_manager.config').AutoloadMode.Disabled
-        }
+        config = function() 
+            require('session_manager').setup {
+                autoload_mode = require('session_manager.config').AutoloadMode.Disabled
+            }
+        end,
     },
     { -- macro manager
         'svermeulen/vim-macrobatics',
