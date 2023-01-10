@@ -26,8 +26,8 @@ This project aims to configure NeoVim to become a powerful code editor, with the
 
 ## Screenshots
 
-![screenshot 1](screenshots/1.png)
-![screenshot 2](screenshots/2.png)
+![Screenshot_1](https://user-images.githubusercontent.com/29354697/211557883-554f94b1-4639-4317-a8ae-08f563ce2356.png)
+![Screenshot_2](https://user-images.githubusercontent.com/29354697/211557890-2081ceea-1d6d-4657-b932-a800b868721f.png)
 
 
 ## Notes for Myself
