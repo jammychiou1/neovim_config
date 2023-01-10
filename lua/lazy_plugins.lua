@@ -61,14 +61,30 @@ require("lazy").setup({
             vim.cmd.colorscheme('catppuccin')
         end
     },
-    { -- fancy statusline, remember to install patch fonts https://www.nerdfonts.com/#home
+    { -- fancy statusline
         'nvim-lualine/lualine.nvim',
         dependencies = {
             'catppuccin',
-            'kyazdani42/nvim-web-devicons'
+            'kyazdani42/nvim-web-devicons',
         },
         config = function()
             require('lualine').setup({
+                winbar = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = { 'filename' },
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {}
+                },
+                inactive_winbar = {
+                    lualine_a = {},
+                    lualine_b = {},
+                    lualine_c = { 'filename' },
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {}
+                },
                 extensions = {
                     'nvim-tree'
                 }
@@ -190,7 +206,7 @@ require("lazy").setup({
             })
         end,
     },
-    {
+    { -- startup page
         "startup-nvim/startup.nvim",
         dependencies = {
             "nvim-telescope/telescope.nvim",
@@ -207,12 +223,13 @@ require("lazy").setup({
         end,
         config = function()
             require('nvim-treesitter.configs').setup({
-                ensure_installed = { "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "latex", "javascript", "html", "verilog" },
+                ensure_installed = { "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "latex",
+                    "javascript", "html", "verilog" },
                 auto_install = true,
             })
         end
     },
-    {
+    { -- rainbow parentheses
         'mrjones2014/nvim-ts-rainbow',
         dependencies = { 'nvim-treesitter' },
         config = function()
@@ -221,6 +238,12 @@ require("lazy").setup({
                     enable = true,
                 }
             }
+        end,
+    },
+    { -- fancy notify pop up
+        'rcarriga/nvim-notify',
+        config = function()
+            vim.notify = require("notify")
         end,
     },
 
@@ -493,7 +516,7 @@ require("lazy").setup({
     { -- session manager
         'Shatur/neovim-session-manager',
         dependencies = { 'nvim-lua/plenary.nvim' },
-        config = function() 
+        config = function()
             require('session_manager').setup {
                 autoload_mode = require('session_manager.config').AutoloadMode.Disabled
             }
