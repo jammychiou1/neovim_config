@@ -81,9 +81,9 @@ vim.keymap.set(
 -- make <C-i> work like original tab
 -- see https://neovim.io/news/2022/04#distinguishing-modifier-keys
 -- and http://www.leonerd.org.uk/hacks/fixterms/
-vim.keymap.set(
-    { 'i' },
-    '<C-i>',
-    '<Tab>',
-    { noremap = true }
-)
+-- vim.keymap.set(
+--     { 'i' },
+--     '<C-i>',
+--     '<Tab>',
+--     { noremap = true }
+-- )

@@ -50,8 +50,9 @@ require("lazy").setup({
                 highlight_overrides = {
                     mocha = function(C)
                         return {
-                            NvimTreeNormal = { bg = '#080808' },
-                            NvimTreeEndOfBuffer = { bg = '#080808', fg = '#080808' },
+                            NvimTreeNormal = { bg = C.base },
+                            NvimTreeWinSeparator = { link = 'WinSeparator' },
+                            -- NvimTreeEndOfBuffer = { bg = '#080808', fg = '#080808' },
                             Pmenu = { bg = C.mantle },
                             LspSagaLightBulb = { fg = C.yellow },
                         }
@@ -68,25 +69,18 @@ require("lazy").setup({
             'kyazdani42/nvim-web-devicons',
         },
         config = function()
+            local outline_extension = {
+                sections = {
+                    lualine_x = {
+                        function() return 'Outline' end
+                    }
+                },
+                filetypes = { 'lspsagaoutline' }
+            }
             require('lualine').setup({
-                winbar = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = { 'filename' },
-                    lualine_x = {},
-                    lualine_y = {},
-                    lualine_z = {}
-                },
-                inactive_winbar = {
-                    lualine_a = {},
-                    lualine_b = {},
-                    lualine_c = { 'filename' },
-                    lualine_x = {},
-                    lualine_y = {},
-                    lualine_z = {}
-                },
                 extensions = {
-                    'nvim-tree'
+                    'nvim-tree',
+                    outline_extension,
                 }
             })
         end,
@@ -105,7 +99,7 @@ require("lazy").setup({
             local line_fill = C.mantle
 
             local tab_bg = C.base
-            local tab_bg_inactive = '#040404'
+            local tab_bg_inactive = C.base
 
             local separator_fg = C.mantle
 
@@ -196,24 +190,32 @@ require("lazy").setup({
             'kyazdani42/nvim-web-devicons'
         },
         config = function()
-            require('nvim-tree').setup({
-                open_on_setup = true,
-                open_on_setup_file = true,
-                open_on_tab = true,
-                view = {
-                    -- signcolumn = "no",
-                }
-            })
+            require('nvim-tree').setup()
+
+            local keymap = vim.keymap.set
+            local api = require("nvim-tree.api")
+
+            keymap("n", "<leader>ut", api.tree.toggle, { desc = 'Toggle Nvim Tree' })
         end,
     },
     { -- startup page
         "startup-nvim/startup.nvim",
         dependencies = {
             "nvim-telescope/telescope.nvim",
-            "nvim-lua/plenary.nvim"
+            "nvim-lua/plenary.nvim",
+            "stevearc/dressing.nvim",
         },
         config = function()
-            require "startup".setup({ theme = "dashboard" })
+            local settings = require('startup.themes.dashboard')
+            settings.body.content = {
+                { " Find File", "Telescope find_files", "1" },
+                { " Find Word", "Telescope live_grep", "2" },
+                { " Recent Files", "Telescope oldfiles", "3" },
+                { " New File", "lua require'startup'.new_file()", "4" },
+                { " Load Session", "SessionManager load_session", "5" },
+            }
+
+            require("startup").setup(settings)
         end
     },
     { -- syntax parsing, remember to install treesitter-cli
@@ -240,12 +242,17 @@ require("lazy").setup({
             }
         end,
     },
+    {
+        'stevearc/dressing.nvim',
+        dependencies = { 'nvim-telescope/telescope.nvim' },
+    },
     { -- fancy notify pop up
         'rcarriga/nvim-notify',
         config = function()
             vim.notify = require("notify")
         end,
     },
+    "lukas-reineke/indent-blankline.nvim", -- indent guide
 
     -- editing, movement and text objects
     { -- manipulating parentheses, brackets, quotes, etc.
@@ -256,7 +263,7 @@ require("lazy").setup({
             vim.g.textobj_sandwich_no_default_key_mappings = 1
         end,
         config = function()
-            vim.api.nvim_command 'runtime macros/sandwich/keymap/surround.vim'
+            vim.cmd('runtime macros/sandwich/keymap/surround.vim')
         end
     },
     { -- replace with register
@@ -302,7 +309,7 @@ require("lazy").setup({
             })
 
             -- also exit terminal mode using <C-j><C-j>
-            vim.api.nvim_set_keymap('t', '<C-j><C-j>', '<C-\\><C-n>', { noremap = true })
+            vim.keymap.set('t', '<C-j><C-j>', '<C-\\><C-n>', { noremap = true })
         end,
     },
     {
@@ -310,32 +317,6 @@ require("lazy").setup({
         opts = { fast_wrap = {} }
     },
     'wellle/targets.vim',
-    -- {
-    --     'nvim-treesitter/nvim-treesitter-textobjects',
-    --     dependencies = { 'nvim-treesitter' },
-    --     config = function()
-    --         require('nvim-treesitter.configs').setup {
-    --             textobjects = {
-    --                 move = {
-    --                     enable = true,
-    --                     set_jumps = true, -- whether to set jumps in the jumplist
-    --                     goto_next_start = {
-    --                         [']]'] = { query = '@function.outer', desc = 'Next function start' },
-    --                     },
-    --                     goto_next_end = {
-    --                         [']['] = { query = '@function.outer', desc = 'Next function end' },
-    --                     },
-    --                     goto_previous_start = {
-    --                         ['[['] = { query = '@function.outer', desc = 'Previous function start' },
-    --                     },
-    --                     goto_previous_end = {
-    --                         ['[]'] = { query = '@function.outer', desc = 'Previous function end' },
-    --                     },
-    --                 },
-    --             },
-    --         }
-    --     end,
-    -- }
 
     -- file finding
     {
@@ -394,6 +375,7 @@ require("lazy").setup({
         "glepnir/lspsaga.nvim",
         branch = "main",
         dependencies = { 'nvim-cmp' },
+        lazy = true,
         config = function()
             local keymap = vim.keymap.set
             local saga = require('lspsaga')
@@ -409,49 +391,37 @@ require("lazy").setup({
             -- if there is no implement it will hide
             -- when you use action in finder like open vsplit then you can
             -- use <C-t> to jump back
-            keymap("n", "gh", "<cmd>Lspsaga lsp_finder<CR>", { silent = true })
+            keymap("n", "gh", function() vim.cmd("Lspsaga lsp_finder") end, { desc = "LSP finder" })
 
             -- Code action
-            keymap({ "n", "v" }, "<space>ca", "<cmd>Lspsaga code_action<CR>", { silent = true })
+            keymap({ "n", "v" }, "<space>ca", function() vim.cmd("Lspsaga code_action") end, { desc = "Code Action" })
 
             -- Rename
-            keymap("n", "<space>rn", "<cmd>Lspsaga rename<CR>", { silent = true })
+            keymap("n", "<space>rn", function() vim.cmd("Lspsaga rename") end, { desc = "Rename" })
 
             -- Peek Definition
             -- you can edit the definition file in this flaotwindow
             -- also support open/vsplit/etc operation check definition_action_keys
             -- support tagstack C-t jump back
-            keymap("n", "gd", "<cmd>Lspsaga peek_definition<CR>", { silent = true })
+            keymap("n", "gd", function() vim.cmd("Lspsaga peek_definition") end, { desc = "Peek Definition" })
 
             -- Show line diagnostics
-            -- keymap("n", "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<CR>", { silent = true })
+            -- keymap("n", "<leader>cd", function() vim.cmd("Lspsaga show_line_diagnostics") end)
 
             -- Show cursor diagnostics
-            keymap("n", "<leader>cd", "<cmd>Lspsaga show_cursor_diagnostics<CR>", { silent = true })
-
-            -- Diagnostic jump can use `<c-o>` to jump back
-            -- keymap("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
-            -- keymap("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
-
-            -- Only jump to error
-            -- keymap("n", "[E", function()
-            --   require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })
-            -- end, { silent = true })
-            -- keymap("n", "]E", function()
-            --   require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })
-            -- end, { silent = true })
+            -- keymap("n", "<leader>cd", function() vim.cmd("Lspsaga show_cursor_diagnostics") end)
 
             -- Outline
-            keymap("n", "<leader>o", "<cmd>Lspsaga outline<CR>", { silent = true })
+            keymap("n", "<leader>uo", function() vim.cmd("Lspsaga outline") end, { desc = "Toggle Outline" })
 
             -- Hover Doc
-            keymap("n", "K", "<cmd>Lspsaga hover_doc<CR>", { silent = true })
+            keymap("n", "K", function() vim.cmd("Lspsaga hover_doc") end, { desc = "Hover Doc" })
 
             -- -- Float terminal
-            -- keymap("n", "<A-d>", "<cmd>Lspsaga open_floaterm<CR>", { silent = true })
+            -- keymap("n", "<A-d>", function() vim.cmd("Lspsaga open_floaterm") end)
 
             -- -- Close float terminal
-            -- keymap("t", "<A-d>", [[<C-\><C-n><cmd>Lspsaga close_floaterm<CR>]], { silent = true })
+            -- keymap("t", "<A-d>", function() vim.cmd("Lspsaga close_floaterm") end)
         end,
     },
     { -- auto install lsp & other servers
@@ -515,11 +485,16 @@ require("lazy").setup({
     'jdhao/whitespace.nvim', -- show and remove trailing whitespaces
     { -- session manager
         'Shatur/neovim-session-manager',
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'stevearc/dressing.nvim',
+        },
         config = function()
             require('session_manager').setup {
                 autoload_mode = require('session_manager.config').AutoloadMode.Disabled
             }
+            vim.keymap.set('n', '<leader>ss', function() vim.cmd("SessionManager load_session") end,
+                { desc = "Load Session" })
         end,
     },
     { -- macro manager

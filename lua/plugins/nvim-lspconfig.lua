@@ -32,6 +32,8 @@ local my_on_attach = function(client, bufnr)
         })
     end
 
+    require('lspsaga')
+
 end
 
 local function generate_capabilities()
