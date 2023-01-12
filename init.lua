@@ -46,8 +46,8 @@ opt.clipboard:prepend('unnamedplus')
 vim.keymap.set('n', '<C-w>t', function() vim.cmd('tabnew') end, { desc = 'Open new tab' })
 
 -- shortcut to open terminal
-vim.keymap.set('n', '<leader>tt', function() vim.cmd('tabnew | terminal') end, { desc = 'Open terminal in new tab' })
-vim.keymap.set('n', '<leader>tv', function() vim.cmd('vsplit | terminal') end, { desc = 'Open terminal in new vertical split' })
+-- vim.keymap.set('n', '<leader>tt', function() vim.cmd('tabnew | terminal') end, { desc = 'Open terminal in new tab' })
+-- vim.keymap.set('n', '<leader>tv', function() vim.cmd('vsplit | terminal') end, { desc = 'Open terminal in new vertical split' })
 
 -- fast paste in insert mode
 vim.keymap.set('i', '<M-a>', '<C-r>+', { noremap = true, desc = 'Fast paste' })

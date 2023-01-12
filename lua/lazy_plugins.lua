@@ -80,6 +80,7 @@ require("lazy").setup({
             require('lualine').setup({
                 extensions = {
                     'nvim-tree',
+                    'toggleterm',
                     outline_extension,
                 }
             })
@@ -252,6 +253,19 @@ require("lazy").setup({
             vim.notify = require("notify")
         end,
     },
+    {
+        "akinsho/toggleterm.nvim",
+        version = '2.*',
+        config = function()
+            require("toggleterm").setup({
+                shade_terminals = false
+            })
+            vim.keymap.set("n", "<leader>tt", function() vim.cmd("ToggleTerm direction=tab") end, { desc = "Toggle term in new tab" })
+            vim.keymap.set("n", "<leader>tv", function() vim.cmd("ToggleTerm direction=vertical size=40") end, { desc = "Toggle term in vertical split" })
+            vim.keymap.set("n", "<leader>tf", function() vim.cmd("ToggleTerm direction=float") end, { desc = "Toggle term in floating window" })
+
+        end
+    },
     "lukas-reineke/indent-blankline.nvim", -- indent guide
 
     -- editing, movement and text objects
@@ -322,7 +336,7 @@ require("lazy").setup({
     {
         -- remember to install ripgrep
         'nvim-telescope/telescope.nvim',
-        tag = '0.1.0',
+        version = '0.1.*',
         dependencies = { 'nvim-lua/plenary.nvim' },
         cmd = "Telescope",
         keys = {
