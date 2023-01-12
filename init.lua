@@ -43,26 +43,26 @@ opt.splitbelow = true
 opt.clipboard:prepend('unnamedplus')
 
 -- fast new tab
-vim.keymap.set('n', '<C-w>t', function() vim.cmd('tabnew') end, { desc = 'open new tab' })
+vim.keymap.set('n', '<C-w>t', function() vim.cmd('tabnew') end, { desc = 'Open new tab' })
 
 -- shortcut to open terminal
-vim.keymap.set('n', '<leader>tt', function() vim.cmd('tabnew | terminal') end, { desc = 'open terminal in new tab' })
-vim.keymap.set('n', '<leader>tv', function() vim.cmd('vsplit | terminal') end, { desc = 'open terminal in new vertical split' })
+vim.keymap.set('n', '<leader>tt', function() vim.cmd('tabnew | terminal') end, { desc = 'Open terminal in new tab' })
+vim.keymap.set('n', '<leader>tv', function() vim.cmd('vsplit | terminal') end, { desc = 'Open terminal in new vertical split' })
 
 -- fast paste in insert mode
-vim.keymap.set('i', '<M-a>', '<C-r>+', { noremap = true, desc = 'fast paste' })
+vim.keymap.set('i', '<M-a>', '<C-r>+', { noremap = true, desc = 'Fast paste' })
 
 -- fast home and end
-vim.keymap.set('n', 'H', '_', { noremap = true, desc = 'start of line' })
-vim.keymap.set('n', 'L', '$', { noremap = true, desc = 'end of line' })
+vim.keymap.set('n', 'H', '_', { noremap = true, desc = 'Start of line' })
+vim.keymap.set('n', 'L', '$', { noremap = true, desc = 'End of line' })
 
 -- fast hjkl in insert mode
 -- see https://neovim.io/news/2022/04#distinguishing-modifier-keys
 -- and http://www.leonerd.org.uk/hacks/fixterms/
-vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true, desc = 'left' })
-vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true, desc = 'down' })
-vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true, desc = 'up' })
-vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true, desc = 'right' })
+vim.keymap.set('i', '<C-h>', '<Left>', { noremap = true, desc = 'Left' })
+vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true, desc = 'Down' })
+vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true, desc = 'Up' })
+vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true, desc = 'Right' })
 
 -- declare plugins and configure them
 -- require('plugins')
