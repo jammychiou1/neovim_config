@@ -1,3 +1,24 @@
+-- bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "--single-branch",
+        "https://github.com/folke/lazy.nvim.git",
+        lazypath,
+    })
+end
+vim.opt.runtimepath:prepend(lazypath)
+
+-- declare plugins and configure them
+-- require('plugins')
+-- require('lazy_plugins')
+require("lazy").setup("plugins")
+
+-- require('atlreg').setup()
+
 local opt = vim.opt
 
 -- tab settings
@@ -30,11 +51,6 @@ opt.smartcase = true
 opt.ruler = false
 opt.showmode = false
 
--- disable netrw at the very start of your init.lua (strongly advised)
--- reference: https://github.com/nvim-tree/nvim-tree.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
 -- split right and below
 opt.splitright = true
 opt.splitbelow = true
@@ -44,10 +60,6 @@ opt.clipboard:prepend('unnamedplus')
 
 -- fast new tab
 vim.keymap.set('n', '<C-w>t', function() vim.cmd('tabnew') end, { desc = 'Open new tab' })
-
--- shortcut to open terminal
--- vim.keymap.set('n', '<leader>tt', function() vim.cmd('tabnew | terminal') end, { desc = 'Open terminal in new tab' })
--- vim.keymap.set('n', '<leader>tv', function() vim.cmd('vsplit | terminal') end, { desc = 'Open terminal in new vertical split' })
 
 -- fast paste in insert mode
 vim.keymap.set('i', '<M-a>', '<C-r>+', { noremap = true, desc = 'Fast paste' })
@@ -64,8 +76,3 @@ vim.keymap.set('i', '<C-j>', '<Down>', { noremap = true, desc = 'Down' })
 vim.keymap.set('i', '<C-k>', '<Up>', { noremap = true, desc = 'Up' })
 vim.keymap.set('i', '<C-l>', '<Right>', { noremap = true, desc = 'Right' })
 
--- declare plugins and configure them
--- require('plugins')
-require('lazy_plugins')
-
--- require('atlreg').setup()

@@ -1,2 +1,0 @@
--- install texlive and latexmk
--- set up .latexmkrc
