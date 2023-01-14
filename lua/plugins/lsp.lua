@@ -1,23 +1,24 @@
 -- lsp stuff
+local servers = {
+    'clangd',
+    -- no language server for make yet
+    'cmake',
+    'gopls',
+    'pyright',
+    'sumneko_lua',
+    'bashls',
+    'marksman',
+    'texlab',
+    'tsserver',
+    'html',
+    'svlangserver',
+}
+
 return {
     {
         'neovim/nvim-lspconfig',
         config = function()
             -- TODO: single language server list
-            local servers = {
-                'clangd',
-                -- no language server for make yet
-                'cmake',
-                'gopls',
-                'pyright',
-                'sumneko_lua',
-                'bashls',
-                'marksman',
-                'texlab',
-                'tsserver',
-                'html',
-                'svlangserver',
-            }
 
             local my_on_attach = function(client, bufnr)
 
@@ -36,9 +37,6 @@ return {
                         ['<space>f'] = lsp.buf.format -- format code
                     })
                 end
-
-                require('lspsaga')
-                require('ufo')
             end
 
             local function generate_capabilities()
@@ -76,15 +74,17 @@ return {
     {
         "glepnir/lspsaga.nvim",
         branch = "main",
-        lazy = true,
+        event = "BufRead",
         config = function()
             local keymap = vim.keymap.set
             local saga = require('lspsaga')
 
             saga.setup({
-                code_action_icon = "",
-                code_action_lightbulb = {
+                lightbulb = {
                     sign = false
+                },
+                ui = {
+                    code_action = "",
                 }
             })
 
@@ -113,37 +113,9 @@ return {
             keymap("n", "K", function() vim.cmd("Lspsaga hover_doc") end, { desc = "Hover Doc" })
         end,
     },
-    { -- auto install lsp servers
-        'williamboman/mason-lspconfig.nvim',
-        dependencies = {
-            'williamboman/mason.nvim',
-            config = true,
-        },
-        config = function()
-            local ml = require('mason-lspconfig')
-
-            ml.setup({
-                -- TODO: single language server list
-                ensure_installed = {
-                    'clangd',
-                    -- no language server for make yet
-                    'cmake',
-                    'gopls',
-                    'pyright',
-                    'sumneko_lua',
-                    'bashls',
-                    'marksman',
-                    'texlab',
-                    'tsserver',
-                    'html',
-                    'svlangserver',
-                },
-            })
-        end,
-    },
     { -- lsp-based folding
         'kevinhwang91/nvim-ufo',
-        lazy = true,
+        event = "BufRead",
         dependencies = { 'kevinhwang91/promise-async' },
         config = function()
             vim.o.foldcolumn = '0'
@@ -156,6 +128,21 @@ return {
             vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
             require('ufo').setup()
+        end,
+    },
+    { -- auto install lsp servers
+        'williamboman/mason-lspconfig.nvim',
+        dependencies = {
+            'williamboman/mason.nvim',
+            config = true,
+        },
+        config = function()
+            local ml = require('mason-lspconfig')
+
+            ml.setup({
+                -- TODO: single language server list
+                ensure_installed = servers,
+            })
         end,
     },
 }

@@ -14,7 +14,7 @@ return {
     },
     { -- rainbow parentheses
         'mrjones2014/nvim-ts-rainbow',
-        event = "VeryLazy",
+        event = "BufRead",
         config = function()
             require('nvim-treesitter.configs').setup {
                 rainbow = {

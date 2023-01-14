@@ -132,11 +132,11 @@ return {
     },
     { -- indent guide
         "lukas-reineke/indent-blankline.nvim",
-        event = "VeryLazy",
+        event = "BufRead",
     },
     { -- show and remove trailing whitespaces
         'jdhao/whitespace.nvim',
-        event = "VeryLazy",
+        event = "BufRead",
     },
     { -- fancy prompts for input/selection
         'stevearc/dressing.nvim',
@@ -201,7 +201,8 @@ return {
     },
     { -- session manager
         'Shatur/neovim-session-manager',
-        -- cmd = "SessionManager",
+        cmd = "SessionManager",
+        event = "BufRead",
         config = function()
             require('session_manager').setup {
                 autoload_mode = require('session_manager.config').AutoloadMode.Disabled
