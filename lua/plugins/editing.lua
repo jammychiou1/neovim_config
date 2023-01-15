@@ -25,14 +25,14 @@ return {
     },
     { -- new delete operation
         'svermeulen/vim-cutlass',
-        enable = false,
+        enabled = false,
         lazy = true,
     },
     { -- easy motion
         'phaazon/hop.nvim',
         branch = 'v2', -- optional but strongly recommended
         -- TODO: revise hop keymaps
-        enable = false,
+        enabled = false,
         lazy = true,
         config = true
     },
