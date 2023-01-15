@@ -111,6 +111,12 @@ wk.register({
         name = '+Toggle UI',
         t = {
             function()
+                vim.cmd("TroubleToggle")
+            end,
+            'Toggle trouble list',
+        },
+        d = {
+            function()
                 require("nvim-tree.api").tree.toggle()
             end,
             'Toggle directory viewer',
@@ -121,7 +127,6 @@ wk.register({
             end,
             'Toggle LSP outline',
         },
-        -- TODO: maybe add mason and lazy
     },
     ['<leader>t'] = {
         name = '+ToggleTerm',
@@ -144,15 +149,15 @@ wk.register({
             'ToggleTerm in floating window',
         },
     },
-    ['<leader>s'] = {
-        name = '+Session',
-        l = {
-            function()
-                vim.cmd("SessionManager load_session")
-            end,
-            'Load session',
-        },
-    },
+    -- ['<leader>s'] = {
+    --     name = '+Session',
+    --     l = {
+    --         function()
+    --             vim.cmd("SessionManager load_session")
+    --         end,
+    --         'Load session',
+    --     },
+    -- },
     ['<leader>f'] = {
         name = '+File',
         f = {
@@ -241,6 +246,19 @@ wk.register({
     },
 })
 
+wk.register({
+    ['<space>'] = {
+        sr = {
+            -- not really LSP based, but kinda fits here
+            function()
+                require("ssr").open()
+            end,
+            "Structural replace",
+        },
+    },
+}, {
+    mode = { 'n', 'x' }
+})
 -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
 -- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 -- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)

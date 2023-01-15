@@ -63,4 +63,16 @@ return {
             vim.g.Mac_NamedMacrosDirectory = vim.fn.stdpath("config") .. "/macrobatics"
         end,
     },
+    {
+        "AckslD/nvim-neoclip.lua",
+        dependencies = { 'kkharji/sqlite.lua' },
+        event = "BufRead",
+        config = function()
+            require('neoclip').setup()
+        end,
+    },
+    {
+        "cshuaimin/ssr.nvim",
+        lazy = true,
+    },
 }

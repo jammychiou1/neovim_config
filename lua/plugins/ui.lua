@@ -190,4 +190,11 @@ return {
         cmd = "SessionManager",
         event = "BufRead",
     },
+    {
+        "folke/trouble.nvim",
+        cmd = "TroubleToggle",
+        config = function()
+            require("trouble").setup()
+        end
+    },
 }

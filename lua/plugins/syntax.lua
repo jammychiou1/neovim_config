@@ -7,8 +7,20 @@ return {
         end,
         config = function()
             require('nvim-treesitter.configs').setup({
-                ensure_installed = { "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "latex",
-                    "javascript", "html", "verilog" },
+                ensure_installed = {
+                    "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "latex",
+                    "javascript", "html", "verilog"
+                },
+                incremental_selection = {
+                    enable = true,
+                    -- TODO: better keymaps
+                    keymaps = {
+                        init_selection = "gnn", -- set to `false` to disable one of the mappings
+                        node_incremental = "grn",
+                        scope_incremental = "grc",
+                        node_decremental = "grm",
+                    },
+                },
             })
         end
     },
