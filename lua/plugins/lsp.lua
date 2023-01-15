@@ -56,14 +56,21 @@ return {
         cmd = "Lspsaga",
         event = "BufRead",
         config = function()
-            -- TODO: fix color schemes
+            local C = require("catppuccin.palettes").get_palette()
             require('lspsaga').setup({
                 lightbulb = {
                     sign = false
                 },
                 ui = {
                     code_action = "",
-                }
+                    diagnostic = "",
+                    colors = {
+                        --float window normal bakcground color
+                        normal_bg = C.mantle,
+                        --title background color
+                        title_bg = '#afd700',
+                    },
+                },
             })
         end,
     },
