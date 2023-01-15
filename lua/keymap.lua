@@ -28,7 +28,7 @@ wk.register({
 
 -- Movements
 wk.register({
-    H = { '_', 'Start of line' },
+    H = { '^', 'Start of line' },
     L = { '$', 'End of line' },
 }, {
     mode = { 'n', 'x', 'o' },
@@ -36,74 +36,20 @@ wk.register({
 
 -- Hop motion
 wk.register({
-    f = {
+    ['_'] = {
         function()
-            require('hop').hint_char1({ 
-                direction = require('hop.hint').HintDirection.AFTER_CURSOR
-            })
+            require('hop').hint_lines_skip_whitespace()
         end,
-        'Find char'
+        'Hop line',
     },
-    F = {
+    ['e'] = {
         function()
-            require('hop').hint_char1({ 
-                direction = require('hop.hint').HintDirection.BEFORE_CURSOR
-            })
+            require('hop').hint_words()
         end,
-        'Find char',
-    },
-    t = {
-        function()
-            require('hop').hint_char1({ 
-                direction = require('hop.hint').HintDirection.AFTER_CURSOR,
-                hint_offset = -1
-            })
-        end,
-        'Find char',
-    },
-    T = {
-        function()
-            require('hop').hint_char1({ 
-                direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
-                hint_offset = 1
-            })
-        end,
-        'Find char',
-    },
-    w = {
-        function()
-            require('hop').hint_words({ 
-                direction = require('hop.hint').HintDirection.AFTER_CURSOR
-            })
-        end,
-        'Find char',
-    },
-    W = {
-        function()
-            require('hop').hint_words({
-                direction = require('hop.hint').HintDirection.BEFORE_CURSOR
-            })
-        end,
-        'Find char',
-    },
-    ['+'] = {
-        function()
-            require('hop').hint_lines_skip_whitespace({
-                direction = require('hop.hint').HintDirection.AFTER_CURSOR
-            })
-        end,
-        'Find char',
-    },
-    ['-'] = {
-        function()
-            require('hop').hint_lines_skip_whitespace({
-                direction = require('hop.hint').HintDirection.BEFORE_CURSOR
-            })
-        end,
-        'Find char',
+        'Hop word',
     },
 }, {
-    mode = { 'n', 'x' },
+    mode = { 'n', 'x', 'o' },
 })
 
 local bar = '\\|'
@@ -229,9 +175,15 @@ wk.register({
         },
         o = {
             function()
-                require('telescope.builtin').old_files()
+                require('telescope.builtin').oldfiles()
             end,
             'Recent files',
+        },
+        n = {
+            function()
+                require('startup').new_file()
+            end,
+            'New file',
         },
     },
 })
@@ -325,11 +277,10 @@ wk.register({
     ['<C-j>'] = { '<Right>', 'Right' },
     ['<C-k>'] = { '<Up>', 'Up' },
     ['<C-l>'] = { '<Down>', 'Down' },
+    ['<C-v>'] = { '<C-r>+', 'Paste' },
 }, {
     mode = 'i',
 })
--- fast paste in insert mode
--- vim.keymap.set('i', '<M-a>', '<C-r>+', { noremap = true, desc = 'Fast paste' })
 
 -- Macro related
 wk.register({

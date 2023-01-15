@@ -173,7 +173,14 @@ return {
     { -- scroll animation
         'karb94/neoscroll.nvim',
         event = "BufRead",
-        config = true,
+        config = function()
+            require('neoscroll').setup({
+                easing_function = "quadratic" -- Default easing function
+            })
+        end
+        -- cond = function()
+        --     return not vim.g.neovide
+        -- end,
     },
     { -- persistent terminals
         "akinsho/toggleterm.nvim",
