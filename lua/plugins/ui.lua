@@ -157,31 +157,23 @@ return {
             vim.g.loaded_netrw = 1
             vim.g.loaded_netrwPlugin = 1
         end,
-        -- cmd = "",
-        config = function()
-            require('nvim-tree').setup()
-
-            local keymap = vim.keymap.set
-            local api = require("nvim-tree.api")
-
-            keymap("n", "<leader>ut", api.tree.toggle, { desc = 'Toggle Nvim Tree' })
-        end,
+        lazy = true,
+        config = true,
     },
     { -- show keymap
+        -- TODO: edit defaults
         'folke/which-key.nvim',
-        -- TODO: centralized mappings
-        -- lazy = true,
+        lazy = true,
         config = function()
-            require('which-key').setup()
-        end
+            vim.o.timeout = true
+            vim.o.timeoutlen = 300
+            require("which-key").setup()
+        end,
     },
     { -- scroll animation
         'karb94/neoscroll.nvim',
-        -- TODO: centralized mappings
-        -- lazy = true,
-        config = function()
-            require('neoscroll').setup()
-        end
+        event = "BufRead",
+        config = true,
     },
     { -- persistent terminals
         "akinsho/toggleterm.nvim",
@@ -191,24 +183,11 @@ return {
             require("toggleterm").setup({
                 shade_terminals = false
             })
-            vim.keymap.set("n", "<leader>tt", function() vim.cmd("ToggleTerm direction=tab") end,
-                { desc = "Toggle term in new tab" })
-            vim.keymap.set("n", "<leader>tv", function() vim.cmd("ToggleTerm direction=vertical size=40") end,
-                { desc = "Toggle term in vertical split" })
-            vim.keymap.set("n", "<leader>tf", function() vim.cmd("ToggleTerm direction=float") end,
-                { desc = "Toggle term in floating window" })
         end
     },
     { -- session manager
         'Shatur/neovim-session-manager',
         cmd = "SessionManager",
         event = "BufRead",
-        config = function()
-            require('session_manager').setup {
-                autoload_mode = require('session_manager.config').AutoloadMode.Disabled
-            }
-            vim.keymap.set('n', '<leader>ss', function() vim.cmd("SessionManager load_session") end,
-                { desc = "Load Session" })
-        end,
     },
 }
