@@ -34,64 +34,107 @@ wk.register({
     mode = { 'n', 'x', 'o' },
 })
 
--- local hop = require('hop')
--- -- remap e to hop word
--- vim.keymap.set(
---     { 'n', 'x', 'o' },
---     'e',
---     function()
---         hop.hint_words()
---     end
--- )
---
--- -- remap E to hop line
--- vim.keymap.set(
---     { 'n', 'x', 'o' },
---     'E',
---     function()
---         hop.hint_lines_skip_whitespace()
---     end
--- )
---
--- local bar = '\\|'
--- local punct = '[[:punct:]]'
--- local alph_word = '[[:alpha:]]\\+'
--- local dig_word = '[[:digit:]]\\+'
--- local space_word = '[[:space:]]\\+'
--- local re = punct .. bar .. alph_word .. bar .. dig_word .. bar .. space_word
---
--- local no_offset = {
---     current_line_only = true,
--- }
--- local offset = {
---     current_line_only = true,
---     hint_offset = 1,
---     hint_position = require 'hop.hint'.HintPosition.END
--- }
---
--- vim.keymap.set(
---     { 'n', 'x', 'o' },
---     '<Tab>',
---     function()
---         hop.hint_patterns(no_offset, re)
---     end
--- )
---
--- vim.keymap.set(
---     { 'i' },
---     '<Tab>',
---     function()
---         hop.hint_patterns(offset, re)
---     end
--- )
---
--- vim.keymap.set(
---     { 'n', 'x', 'o', 'i' },
---     '<S-Tab>',
---     function()
---         hop.hint_patterns(no_offset, re)
---     end
--- )
+-- Hop motion
+wk.register({
+    f = {
+        function()
+            require('hop').hint_char1({ 
+                direction = require('hop.hint').HintDirection.AFTER_CURSOR
+            })
+        end,
+        'Find char'
+    },
+    F = {
+        function()
+            require('hop').hint_char1({ 
+                direction = require('hop.hint').HintDirection.BEFORE_CURSOR
+            })
+        end,
+        'Find char',
+    },
+    t = {
+        function()
+            require('hop').hint_char1({ 
+                direction = require('hop.hint').HintDirection.AFTER_CURSOR,
+                hint_offset = -1
+            })
+        end,
+        'Find char',
+    },
+    T = {
+        function()
+            require('hop').hint_char1({ 
+                direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+                hint_offset = 1
+            })
+        end,
+        'Find char',
+    },
+    w = {
+        function()
+            require('hop').hint_words({ 
+                direction = require('hop.hint').HintDirection.AFTER_CURSOR
+            })
+        end,
+        'Find char',
+    },
+    W = {
+        function()
+            require('hop').hint_words({
+                direction = require('hop.hint').HintDirection.BEFORE_CURSOR
+            })
+        end,
+        'Find char',
+    },
+    ['+'] = {
+        function()
+            require('hop').hint_lines_skip_whitespace({
+                direction = require('hop.hint').HintDirection.AFTER_CURSOR
+            })
+        end,
+        'Find char',
+    },
+    ['-'] = {
+        function()
+            require('hop').hint_lines_skip_whitespace({
+                direction = require('hop.hint').HintDirection.BEFORE_CURSOR
+            })
+        end,
+        'Find char',
+    },
+}, {
+    mode = { 'n', 'x' },
+})
+
+local bar = '\\|'
+local punct = '[[:punct:]]'
+local alph_word = '[[:alpha:]]\\+'
+local dig_word = '[[:digit:]]\\+'
+local space_word = '[[:space:]]\\+'
+local re = punct .. bar .. alph_word .. bar .. dig_word .. bar .. space_word
+
+wk.register({
+    ['<Tab>'] = {
+        function()
+            require('hop').hint_patterns({
+                current_line_only = true,
+                hint_offset = 1,
+                hint_position = require 'hop.hint'.HintPosition.END
+            }, re)
+        end,
+        'Find char'
+    },
+    ['<S-Tab>'] = {
+        function()
+            require('hop').hint_patterns({
+                current_line_only = true,
+            }, re)
+        end,
+        'Find char',
+    },
+}, {
+    mode = { 'i' },
+})
 
 wk.register({
     ["<C-w>"] = {
