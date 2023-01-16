@@ -15,10 +15,10 @@ return {
                     enable = true,
                     -- TODO: better keymaps
                     keymaps = {
-                        init_selection = "gnn", -- set to `false` to disable one of the mappings
-                        node_incremental = "grn",
-                        scope_incremental = "grc",
-                        node_decremental = "grm",
+                        init_selection = "<CR>", -- set to `false` to disable one of the mappings
+                        node_incremental = "<CR>",
+                        scope_incremental = false,
+                        node_decremental = "<S-CR>",
                     },
                 },
             })
