@@ -26,6 +26,12 @@ wk.register({
     mode = { 'x' },
 })
 
+wk.register({
+    ['<RightMouse>'] = { '<LeftMouse>.', 'Repeat' },
+}, {
+    -- noremap = false,
+})
+
 -- Movements
 wk.register({
     H = { '^', 'Start of line' },
