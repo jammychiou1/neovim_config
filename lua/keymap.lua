@@ -13,8 +13,11 @@ wk.register({
     cc = { '"_cc', 'Change line' },
     C = { '"_C', 'Change to end of line' },
     s = { function() require('substitute').operator() end, 'Substitute' },
-    ss = { function() require('substitute').line() end, 'Substitute line' },
+    ss = { function() require('substitute').line() end, 'Substitute line' }, -- nmapping '_' (start of line) breaks this
     S = { function() require('substitute').eol() end, 'Substitute to end of line' },
+
+    ['{'] = { function() require('sibling-swap').swap_with_left() end, 'Swap with left' },
+    ['}'] = { function() require('sibling-swap').swap_with_right() end, 'Swap with right' },
 })
 
 wk.register({
@@ -29,7 +32,7 @@ wk.register({
 wk.register({
     ['<RightMouse>'] = { '<LeftMouse>.', 'Repeat' },
 }, {
-    -- noremap = false,
+    noremap = false,
 })
 
 -- Movements
@@ -40,9 +43,23 @@ wk.register({
     mode = { 'n', 'x', 'o' },
 })
 
+-- Text Object
+-- wk.register({
+--     ['m'] = {
+--         "<cmd>lua require('tsht').nodes()<CR>",
+--         'Syntax Node',
+--     },
+-- }, {
+--     mode = { 'x', 'o' },
+-- })
+
+-- The above doesn't work for some unknown reason
+vim.cmd("omap     <silent> <CR> :<C-U>lua require('tsht').nodes()<CR>")
+vim.cmd("xnoremap <silent> <CR> :lua require('tsht').nodes()<CR>")
+
 -- Hop motion
 wk.register({
-    ['_'] = {
+    ['^'] = {
         function()
             require('hop').hint_lines_skip_whitespace()
         end,
@@ -53,6 +70,26 @@ wk.register({
             require('hop').hint_words()
         end,
         'Hop word',
+    },
+    ['E'] = {
+        function()
+            require('hop').hint_words({
+                hint_position = require 'hop.hint'.HintPosition.END,
+            })
+        end,
+        'Hop end of word',
+    },
+    ['m'] = {
+        function()
+            require('tsht').move({ side = "start" })
+        end,
+        'Hop node',
+    },
+    ['M'] = {
+        function()
+            require('tsht').move({ side = "end" })
+        end,
+        'Hop end of node',
     },
 }, {
     mode = { 'n', 'x', 'o' },

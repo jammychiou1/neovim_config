@@ -15,8 +15,23 @@ local servers = {
 }
 
 return {
+    { -- auto install lsp servers
+        'williamboman/mason-lspconfig.nvim',
+        event = "VeryLazy",
+        dependencies = {
+            { 'williamboman/mason.nvim', config = true },
+        },
+        config = function()
+            local ml = require('mason-lspconfig')
+
+            ml.setup({
+                ensure_installed = servers,
+            })
+        end,
+    },
     {
         'neovim/nvim-lspconfig',
+        event = "VeryLazy",
         config = function()
             local function generate_capabilities()
                 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -49,6 +64,13 @@ return {
                 })
             end
         end,
+    },
+    {
+        'mrded/nvim-lsp-notify',
+        event = "BufRead",
+        config = function()
+            require('lsp-notify').setup({})
+        end
     },
     {
         "glepnir/lspsaga.nvim",
@@ -85,19 +107,6 @@ return {
             vim.o.foldenable = true
 
             require('ufo').setup()
-        end,
-    },
-    { -- auto install lsp servers
-        'williamboman/mason-lspconfig.nvim',
-        dependencies = {
-            { 'williamboman/mason.nvim', config = true },
-        },
-        config = function()
-            local ml = require('mason-lspconfig')
-
-            ml.setup({
-                ensure_installed = servers,
-            })
         end,
     },
     {

@@ -145,6 +145,8 @@ return {
     { -- fancy notifications
         'rcarriga/nvim-notify',
         event = "VeryLazy",
+        -- lazy = false,
+        -- priority = 1000,
         config = function()
             vim.notify = require("notify")
         end,
@@ -203,5 +205,13 @@ return {
         config = function()
             require("trouble").setup()
         end
+    },
+    {
+        'sindrets/diffview.nvim',
+        cmd = 'DiffviewOpen',
+    },
+    {
+        "elihunter173/dirbuf.nvim",
+        cmd = 'Dirbuf',
     },
 }

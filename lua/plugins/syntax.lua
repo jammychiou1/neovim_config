@@ -5,21 +5,12 @@ return {
         build = function()
             require('nvim-treesitter.install').update({ with_sync = true })
         end,
+        event = "VeryLazy",
         config = function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = {
                     "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "latex",
                     "javascript", "html", "verilog"
-                },
-                incremental_selection = {
-                    enable = true,
-                    -- TODO: better keymaps
-                    keymaps = {
-                        init_selection = "<CR>", -- set to `false` to disable one of the mappings
-                        node_incremental = "<CR>",
-                        scope_incremental = false,
-                        node_decremental = "<S-CR>",
-                    },
                 },
             })
         end
