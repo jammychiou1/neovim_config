@@ -87,7 +87,7 @@ return {
                     code_action = "",
                     diagnostic = "",
                     colors = {
-                        --float window normal bakcground color
+                        --float window normal background color
                         normal_bg = C.mantle,
                         --title background color
                         title_bg = '#afd700',
@@ -120,6 +120,13 @@ return {
                     null_ls.builtins.completion.spell,
                 },
             })
+        end
+    },
+    {
+        "ThePrimeagen/refactoring.nvim",
+        lazy = true,
+        config = function()
+            require('refactoring').setup({})
         end
     },
 }

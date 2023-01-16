@@ -54,6 +54,7 @@ wk.register({
 -- })
 
 -- The above doesn't work for some unknown reason
+-- Maybe whichkey xmap is not working correctly
 vim.cmd("omap     <silent> <CR> :<C-U>lua require('tsht').nodes()<CR>")
 vim.cmd("xnoremap <silent> <CR> :lua require('tsht').nodes()<CR>")
 
@@ -274,6 +275,29 @@ wk.register({
         "Show LSP Hover",
     },
 })
+
+-- wk.register({
+--     ['<space>'] = {
+--         name = '+LSP actions',
+--         rr = {
+--             function()
+--                 require('refactoring').select_refactor()
+--             end,
+--             "Refactor",
+--         },
+--     },
+-- }, {
+--     mode = { 'x' }
+-- })
+
+-- The above doesn't work for some unknown reason
+-- Maybe whichkey xmap is not working correctly
+vim.api.nvim_set_keymap(
+    "x",
+    "<space>rr",
+    ":lua require('refactoring').select_refactor()<CR>",
+    { noremap = true, silent = true }
+)
 
 wk.register({
     ['<space>'] = {
