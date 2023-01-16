@@ -23,7 +23,7 @@ return {
         config = function()
             local outline_extension = {
                 sections = {
-                    lualine_x = {
+                    lualine_z = {
                         function() return 'Outline' end
                     }
                 },

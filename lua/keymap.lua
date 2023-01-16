@@ -138,15 +138,6 @@ wk.register({
             'ToggleTerm in floating window',
         },
     },
-    -- ['<leader>s'] = {
-    --     name = '+Session',
-    --     l = {
-    --         function()
-    --             vim.cmd("SessionManager load_session")
-    --         end,
-    --         'Load session',
-    --     },
-    -- },
     ['<leader>f'] = {
         name = '+File',
         f = {
@@ -274,9 +265,9 @@ wk.register({
     -- see https://neovim.io/news/2022/04#distinguishing-modifier-keys
     -- and http://www.leonerd.org.uk/hacks/fixterms/
     ['<C-h>'] = { '<Left>', 'Left' },
-    ['<C-j>'] = { '<Right>', 'Right' },
+    ['<C-j>'] = { '<Down>', 'Down' },
     ['<C-k>'] = { '<Up>', 'Up' },
-    ['<C-l>'] = { '<Down>', 'Down' },
+    ['<C-l>'] = { '<Right>', 'Right' },
     ['<C-v>'] = { '<C-r>+', 'Paste' },
 }, {
     mode = 'i',
@@ -308,5 +299,15 @@ wk.register({
     gq = {
         '<plug>(Mac_RecordNew)',
         'Record new macro',
+    },
+})
+
+-- vimtex
+wk.register({
+    ['<leader>l'] = {
+        name = '+vimtex',
+        l = 'Toggle compiling',
+        v = 'Preview PDF',
+        c = 'Clean up auxiliary files',
     },
 })
