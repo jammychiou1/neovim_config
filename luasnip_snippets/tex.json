@@ -1,0 +1,315 @@
+{
+  "beg": {
+    "prefix": "beg",
+    "description": "begin{} / end{}",
+    "body": [
+      "\\begin{$1\\}",
+      "\t$0",
+      "\\end{$1\\}"
+    ]
+  },
+  "enum": {
+    "prefix": "enum",
+    "description": "Enumerate",
+    "body": [
+      "\\begin{enumerate\\}",
+      "\t\\item $0",
+      "\\end{enumerate\\}"
+    ]
+  },
+  "item": {
+    "prefix": "item",
+    "description": "Itemize",
+    "body": [
+      "\\begin{itemize\\}",
+      "\t\\item $0",
+      "\\end{itemize\\}"
+    ]
+  },
+  "desc": {
+    "prefix": "desc",
+    "description": "Description",
+    "body": [
+      "\\begin{description\\}",
+      "\t\\item[$1] $0",
+      "\\end{description\\}"
+    ]
+  },
+  "pac": {
+    "prefix": "pac",
+    "description": "Package",
+    "body": "\\usepackage[${1:options}]{${2:package}\\}$0"
+  },
+  "eqs": {
+    "prefix": "eqs",
+    "description": "Equations",
+    "body": [
+      "\\begin{equations*\\}",
+      "\t$1",
+      "\\end{equations*\\}"
+    ]
+  },
+  "ali": {
+    "prefix": "ali",
+    "description": "Align",
+    "body": [
+      "\\begin{align*\\}",
+      "\t$1",
+      "\\end{align*\\}"
+    ]
+  },
+  "case": {
+    "prefix": "case",
+    "description": "cases",
+    "body": [
+      "\\begin{cases\\}",
+      "\t$1",
+      "\\end{cases\\}"
+    ]
+  },
+  "period": {
+    "prefix": "period",
+    "description": "Period in math",
+    "body": "\\,\\text{.\\}$0"
+  }
+  "comma": {
+    "prefix": "comma",
+    "description": "Comma in math",
+    "body": "\\,\\text{,\\}$0"
+  }
+  "//": {
+    "prefix": "//",
+    "description": "Fraction",
+    "body": "\\frac{$1\\}{$2\\}$0"
+  },
+  "^^": {
+    "prefix": "^^",
+    "description": "Superscript",
+    "body": "^{$1\\}$0"
+  },
+  "__": {
+    "prefix": "__",
+    "description": "Subscript",
+    "body": "_{$1\\}$0"
+  },
+  "ceil": {
+    "prefix": "ceil",
+    "description": "Ceiling",
+    "body": "\\left\\lceil $1 \\right\\rceil $0"
+  },
+  "floor": {
+    "prefix": "floor",
+    "description": "Floor",
+    "body": "\\left\\lfloor $1 \\right\\rfloor $0"
+  },
+  "norm": {
+    "prefix": "norm",
+    "description": "Norm",
+    "body": "\\|$1\\|$0"
+  },
+  "set": {
+    "prefix": "set",
+    "description": "Set",
+    "body": "\\{$1\\\\} $0"
+  },
+  "sum": {
+    "prefix": "sum",
+    "description": "Summation",
+    "body": "\\sum_{${1:n=${2:1}}\\}^{${2:\\infty}\\} $0"
+  },
+  "prod": {
+    "prefix": "prod",
+    "description": "Multiplication",
+    "body": "\\prod_{${1:n=${2:1}}\\}^{${3:\\infty}\\} $0"
+  },
+  "dint": {
+    "prefix": "dint",
+    "description": "Integral",
+    "body": "\\int_{${1:-\\infty}\\}^{${2:\\infty}\\} $0"
+    }
+  },
+  "uuu": {
+    "prefix": "uuu",
+    "description": "Big cup",
+    "body": "\\bigcup_{${1:i \\in ${2: I}}\\} $0"
+  },
+  "nnn": {
+    "prefix": "nnn",
+    "description": "Big cap",
+    "body": "\\bigcap_{${1:i \\in ${2: I}}\\} $0"
+  },
+  "lim": {
+    "prefix": "lim",
+    "description": "Limit",
+    "body": "\\lim_{${1:n} \\to ${2:\\infty}\\} "
+  },
+  "EE": {
+    "prefix": "EE",
+    "description": "Exists",
+    "body": "\\exists "
+    }
+  },
+  "AA": {
+    "prefix": "AA",
+    "description": "For all",
+    "body": "\\forall "
+    }
+  },
+  "sq": {
+    "prefix": "sq",
+    "description": "Square root",
+    "body": "\\sqrt{$1\\} $0"
+  },
+  "sr": {
+    "prefix": "sr",
+    "description": "Squared",
+    "body": "^2"
+  },
+  "cb": {
+    "prefix": "cb",
+    "description": "Cubed",
+    "body": "^3"
+  },
+  "!=": {
+    "prefix": "!=",
+    "description": "Not equal",
+    "body": "\\neq $0"
+  },
+  "inf": {
+    "prefix": "inf",
+    "description": "\\infty",
+    "body": "\\infty"
+  },
+  "<=": {
+    "prefix": "<=",
+    "description": "Less than or equal",
+    "body": "\\leq "
+  },
+  ">=": {
+    "prefix": ">=",
+    "description": "Greater than or equal",
+    "body": "\\geq "
+    }
+  },
+  "..c": {
+    "prefix": "..c",
+    "description": "dotsc",
+    "body": "\\dotsc"
+  },
+  "Rarr": {
+    "prefix": "Rarr",
+    "description": "Double right arrow",
+    "body": "\\implies"
+  },
+  "xx": {
+    "prefix": "xx",
+    "description": "Cross",
+    "body": "\\times "
+    }
+  },
+  "**": {
+    "prefix": "**",
+    "description": "Cdot",
+    "body": "\\cdot "
+  },
+  "invs": {
+    "prefix": "invs",
+    "description": "Inverse",
+    "body": "^{-1\\}"
+  },
+  "\\\\\\": {
+    "prefix": "\\\\\\",
+    "description": "Set minus",
+    "body": "\\setminus"
+  },
+  "~~": {
+    "prefix": "~~",
+    "description": "~",
+    "body": "\\sim "
+  },
+  "||": {
+    "prefix": "||",
+    "description": "Mid",
+    "body": " \\mid "
+  },
+  "cc": {
+    "prefix": "cc",
+    "description": "Subset",
+    "body": "\\subseteq "
+  },
+  "notin": {
+    "prefix": "notin",
+    "description": "Not in",
+    "body": "\\not\\in "
+  },
+  "inn": {
+    "prefix": "inn",
+    "description": "In",
+    "body": "\\in "
+  },
+  "NN": {
+    "prefix": "NN",
+    "description": "Cap",
+    "body": "\\cap "
+  },
+  "UU": {
+    "prefix": "UU",
+    "description": "Cup",
+    "body": "\\cup "
+  },
+  "opname": {
+    "prefix": "opname",
+    "description": "Mathrm",
+    "body": "\\mathrm{$1\\}$0"
+    }
+  },
+  "mrm": {
+    "prefix": "mrm",
+    "description": "Mathrm",
+    "body": "\\mathrm{$1\\}$0"
+    }
+  },
+  "mbf": {
+    "prefix": "mbf",
+    "description": "Mathbf",
+    "body": "\\mathbf{$1\\}$0"
+    }
+  },
+  "mcal": {
+    "prefix": "mcal",
+    "description": "Mathcal",
+    "body": "\\mathcal{$1\\}$0"
+    }
+  },
+  "mtt": {
+    "prefix": "mtt",
+    "description": "Mathtt",
+    "body": "\\mathtt{$1\\}$0"
+    }
+  },
+  "OO": {
+    "prefix": "OO",
+    "description": "emptyset",
+    "body": "\\O"
+  },
+  "Nat": {
+    "prefix": "Nat",
+    "description": "Natural number",
+    "body": "\\N"
+  },
+  "Int": {
+    "prefix": "Int",
+    "description": "Integer",
+    "body": "\\Z"
+  },
+  "Rat": {
+    "prefix": "Rat",
+    "description": "Rational number",
+    "body": "\\Q"
+  },
+  "Real": {
+    "prefix": "Real",
+    "description": "Real number",
+    "body": "\\R"
+  },
+}

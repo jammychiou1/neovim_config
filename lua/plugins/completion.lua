@@ -1,10 +1,16 @@
 -- auto completion
 return {
+    { -- snippet engine
+        'L3MON4D3/LuaSnip',
+        lazy = true,
+        config = function()
+            require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./luasnip_snippets" } })
+        end,
+    },
     { -- completion engine
         'hrsh7th/nvim-cmp',
         event = "InsertEnter",
         dependencies = {
-            -- snippet engine
             'L3MON4D3/LuaSnip',
 
             -- completion sources
@@ -29,8 +35,10 @@ return {
                     ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
                     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
                     ['<C-y>'] = cmp.mapping(function(fallback)
-                        local entry = cmp.get_active_entry()
-                        if entry and entry.completion_item.insertTextFormat == cmp.lsp.InsertTextFormat.Snippet then
+                        -- local entry = cmp.get_active_entry()
+                        -- vim.notify(vim.inspect(entry), nil, nil)
+                        -- if entry and entry.completion_item.insertTextFormat == cmp.lsp.InsertTextFormat.Snippet then
+                        if cmp.visible() then
                             cmp.confirm({ select = false })
                         elseif luasnip.jumpable(1) then
                             luasnip.jump(1)
@@ -39,7 +47,9 @@ return {
                         end
                     end, { 'i', 's' }),
                     ['<C-e>'] = cmp.mapping(function(fallback)
-                        if luasnip.jumpable(-1) then
+                        if cmp.visible() then
+                            cmp.mapping.close()
+                        elseif luasnip.jumpable(-1) then
                             luasnip.jump(-1)
                         else
                             fallback()

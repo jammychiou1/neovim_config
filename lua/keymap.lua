@@ -58,6 +58,16 @@ wk.register({
 vim.cmd("omap     <silent> <CR> :<C-U>lua require('tsht').nodes()<CR>")
 vim.cmd("xnoremap <silent> <CR> :lua require('tsht').nodes()<CR>")
 
+wk.register({
+    ['<CR>'] = {
+        'v<CR>',
+        'Select node',
+    },
+}, {
+    mode = { 'n' },
+    noremap = false,
+})
+
 -- Hop motion
 wk.register({
     ['^'] = {
@@ -112,7 +122,7 @@ wk.register({
                 hint_position = require 'hop.hint'.HintPosition.END
             }, re)
         end,
-        'Find char'
+        'Hop in line'
     },
     ['<S-Tab>'] = {
         function()
@@ -120,10 +130,33 @@ wk.register({
                 current_line_only = true,
             }, re)
         end,
-        'Find char',
+        'Hop in line',
     },
 }, {
     mode = { 'i' },
+})
+
+wk.register({
+    ['<Tab>'] = {
+        function()
+            require('hop').hint_patterns({
+                current_line_only = true,
+                --hint_offset = 1,
+                hint_position = require 'hop.hint'.HintPosition.END
+            }, re)
+        end,
+        'Hop in line'
+    },
+    ['<S-Tab>'] = {
+        function()
+            require('hop').hint_patterns({
+                current_line_only = true,
+            }, re)
+        end,
+        'Hop in line',
+    },
+}, {
+    mode = { 'n', 'x', 'o' },
 })
 
 wk.register({
