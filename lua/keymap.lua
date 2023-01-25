@@ -16,8 +16,8 @@ wk.register({
     ss = { function() require('substitute').line() end, 'Substitute line' }, -- nmapping '_' (start of line) breaks this
     S = { function() require('substitute').eol() end, 'Substitute to end of line' },
 
-    ['{'] = { function() require('sibling-swap').swap_with_left() end, 'Swap with left' },
-    ['}'] = { function() require('sibling-swap').swap_with_right() end, 'Swap with right' },
+    -- ['{'] = { function() require('sibling-swap').swap_with_left() end, 'Swap with left' },
+    -- ['}'] = { function() require('sibling-swap').swap_with_right() end, 'Swap with right' },
 })
 
 wk.register({
@@ -90,18 +90,18 @@ wk.register({
         end,
         'Hop end of word',
     },
-    ['m'] = {
-        function()
-            require('tsht').move({ side = "start" })
-        end,
-        'Hop node',
-    },
-    ['M'] = {
-        function()
-            require('tsht').move({ side = "end" })
-        end,
-        'Hop end of node',
-    },
+    -- ['m'] = {
+    --     function()
+    --         require('tsht').move({ side = "start" })
+    --     end,
+    --     'Hop node',
+    -- },
+    -- ['M'] = {
+    --     function()
+    --         require('tsht').move({ side = "end" })
+    --     end,
+    --     'Hop end of node',
+    -- },
 }, {
     mode = { 'n', 'x', 'o' },
 })

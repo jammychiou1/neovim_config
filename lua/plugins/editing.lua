@@ -58,6 +58,13 @@ return {
         end,
     },
     {
+        "LeonHeidelbach/trailblazer.nvim",
+        event = "BufRead",
+        config = function()
+            require("trailblazer").setup()
+        end,
+    },
+    {
         'Wansmer/sibling-swap.nvim',
         lazy = true,
         config = function()
