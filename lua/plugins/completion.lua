@@ -19,6 +19,7 @@ return {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-nvim-lsp-signature-help',
             'saadparwaiz1/cmp_luasnip',
+            -- 'f3fora/cmp-spell',
         },
         config = function()
             local cmp = require('cmp')
@@ -61,8 +62,17 @@ return {
                     { name = 'luasnip' },
                     { name = 'nvim_lsp_signature_help' },
                     { name = 'path' },
+                    -- {
+                    --     name = 'spell',
+                    --     option = {
+                    --         keep_all_entries = false,
+                    --         enable_in_context = function()
+                    --             return true
+                    --         end,
+                    --     },
+                    -- },
                 }, {
-                    { name = 'buffer' }
+                    { name = 'buffer' },
                 }),
             })
 
