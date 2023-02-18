@@ -5,7 +5,7 @@ local servers = {
     'cmake',
     'gopls',
     'pyright',
-    'sumneko_lua',
+    'lua_ls',
     'bashls',
     'marksman',
     'texlab',
