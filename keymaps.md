@@ -21,19 +21,16 @@
 - e
     - hop word
 - E
-    - hop line
+    - hop end of word
 - f
     - find char (inclusive)
 - F
     - backward find char (inclusive) (seldom used)
 - g
     - gg
-        - start of file gd
+        - start of file
+    - gd
         - go to definition
-    - gD
-        - peek declaration
-    - gr
-        - peek reference
     - gh
         - lsp find
     - gq
