@@ -32,6 +32,9 @@ return {
     {
         'neovim/nvim-lspconfig',
         event = "VeryLazy",
+        dependencies = {
+            'williamboman/mason-lspconfig.nvim',
+        },
         config = function()
             local function generate_capabilities()
                 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -74,9 +77,14 @@ return {
     },
     {
         "glepnir/lspsaga.nvim",
-        branch = "main",
         cmd = "Lspsaga",
         event = "BufRead",
+        dependencies = {
+            -- {"nvim-tree/nvim-web-devicons"},
+            --Please make sure you install markdown and markdown_inline parser
+            -- {"nvim-treesitter/nvim-treesitter"},
+            { 'neovim/nvim-lspconfig' },
+        },
         config = function()
             local C = require("catppuccin.palettes").get_palette()
             require('lspsaga').setup({

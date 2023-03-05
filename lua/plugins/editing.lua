@@ -6,16 +6,13 @@ return {
         opts = { fast_wrap = {} }
     },
     { -- manipulating parentheses, brackets, quotes, etc.
-        'machakann/vim-sandwich',
+        'kylechui/nvim-surround',
         event = "BufRead",
-        init = function()
-            vim.g.sandwich_no_default_key_mappings = 1
-            vim.g.operator_sandwich_no_default_key_mappings = 1
-            vim.g.textobj_sandwich_no_default_key_mappings = 1
-        end,
         config = function()
-            vim.cmd('runtime macros/sandwich/keymap/surround.vim')
-        end,
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
     },
     { -- replace with register
         'gbprod/substitute.nvim',
