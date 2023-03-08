@@ -115,31 +115,4 @@ return {
             require('neoclip').setup()
         end,
     },
-    -- {
-    --     "smjonas/snippet-converter.nvim",
-    --     -- SnippetConverter uses semantic versioning. Example: use version = "1.*" to avoid breaking changes on version 1.
-    --     -- Uncomment the next line to follow stable releases only.
-    --     -- tag = "*",
-    --     cmd = "ConvertSnippets",
-    --     config = function()
-    --         local template = {
-    --             -- name = "t1", (optionally give your template a name to refer to it in the `ConvertSnippets` command)
-    --             sources = {
-    --                 ultisnips = {
-    --                     vim.fn.stdpath("config") .. "/latex-snippets/tex.snippets",
-    --                 },
-    --             },
-    --             output = {
-    --                 -- Specify the output formats and paths
-    --                 vscode_luasnip = {
-    --                     vim.fn.stdpath("config") .. "/luasnip_snippets",
-    --                 },
-    --             },
-    --         }
-
-    --         require("snippet_converter").setup {
-    --             templates = { template },
-    --         }
-    --     end
-    -- },
 }
