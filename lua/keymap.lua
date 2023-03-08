@@ -254,6 +254,15 @@ wk.register({
             'New file',
         },
     },
+    ['<leader>r'] = {
+        name = '+Register',
+        p = {
+            function()
+                require('telescope').extensions.neoclip.plus()
+            end,
+            'Pick for plus register',
+        },
+    },
 })
 
 -- LSP related
@@ -375,23 +384,23 @@ wk.register({
 
 -- Macro related
 wk.register({
-    ['<leader>m'] = {
-        name = '+Macro management',
-        h = {
-            function()
-                vim.cmd('DisplayMacroHistory')
-            end,
-            "Show macro history",
-        },
-        p = {
-            '<plug>(Mac_RotateBack)',
-            "Rotate to previous macro",
-        },
-        n = {
-            '<plug>(Mac_RotateForward)',
-            "Rotate to next macro",
-        },
-    },
+    -- ['<leader>m'] = {
+    --     -- name = '+Macro management',
+    --     -- h = {
+    --     --     function()
+    --     --         vim.cmd('DisplayMacroHistory')
+    --     --     end,
+    --     --     "Show macro history",
+    --     -- },
+    --     -- p = {
+    --     --     '<plug>(Mac_RotateBack)',
+    --     --     "Rotate to previous macro",
+    --     -- },
+    --     -- n = {
+    --     --     '<plug>(Mac_RotateForward)',
+    --     --     "Rotate to next macro",
+    --     -- },
+    -- },
     q = {
         '<plug>(Mac_Play)',
         'Execute macro',

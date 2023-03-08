@@ -1,11 +1,13 @@
 -- editing, movement and text objects
 return {
-    { -- auto parentheses pairing
+    {
+        -- auto parentheses pairing
         'windwp/nvim-autopairs',
         event = "InsertEnter",
         opts = { fast_wrap = {} }
     },
-    { -- manipulating parentheses, brackets, quotes, etc.
+    {
+        -- manipulating parentheses, brackets, quotes, etc.
         'kylechui/nvim-surround',
         event = "BufRead",
         config = function()
@@ -14,17 +16,20 @@ return {
             })
         end
     },
-    { -- replace with register
+    {
+        -- replace with register
         'gbprod/substitute.nvim',
         lazy = true,
         config = true
     },
-    { -- new delete operation
+    {
+        -- new delete operation
         'svermeulen/vim-cutlass',
         enabled = false,
         lazy = true,
     },
-    { -- easy motion
+    {
+        -- easy motion
         'phaazon/hop.nvim',
         branch = 'v2', -- optional but strongly recommended
         lazy = true,
@@ -70,7 +75,8 @@ return {
             })
         end,
     },
-    { -- fast insert mode exit
+    {
+        -- fast insert mode exit
         'max397574/better-escape.nvim',
         event = "InsertEnter",
         config = function()
@@ -81,15 +87,18 @@ return {
             })
         end,
     },
-    { -- more text objects
+    {
+        -- more text objects
         'wellle/targets.vim',
         event = "BufRead",
     },
-    { -- range commands apply to part of line
+    {
+        -- range commands apply to part of line
         'matveyt/vim-opera',
         event = "BufRead",
     },
-    { -- macro manager
+    {
+        -- macro manager
         'svermeulen/vim-macrobatics',
         dependencies = { 'tpope/vim-repeat' },
         event = "BufRead",
@@ -99,8 +108,9 @@ return {
     },
     {
         "AckslD/nvim-neoclip.lua",
-        dependencies = { 'kkharji/sqlite.lua' },
-        event = "BufRead",
+        dependencies = {
+            'kkharji/sqlite.lua',
+        },
         config = function()
             require('neoclip').setup()
         end,
