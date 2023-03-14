@@ -415,8 +415,27 @@ wk.register({
 wk.register({
     ['<leader>l'] = {
         name = '+vimtex',
-        l = 'Toggle compiling',
-        v = 'Preview PDF',
-        c = 'Clean up auxiliary files',
+        l = {
+            '<plug>(vimtex-compile)',
+            'Toggle compiling',
+        },
+        v = {
+            '<plug>(vimtex-view)',
+            'Preview PDF',
+        },
+        c = {
+            '<plug>(vimtex-clean)',
+            'Clean up auxiliary files',
+        },
+        q = {
+            '<plug>(vimtex-log)',
+            'Clean up auxiliary files',
+        },
+        p = {
+            function()
+                require("nabla").popup()
+            end,
+            "Preview math",
+        },
     },
 })
