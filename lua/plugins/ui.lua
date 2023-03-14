@@ -12,7 +12,7 @@ return {
                 { " Find Word", "Telescope live_grep", "2" },
                 { " Recent Files", "Telescope oldfiles", "3" },
                 { " New File", "lua require'startup'.new_file()", "4" },
-                { " Load Session", "SessionManager load_session", "5" },
+                { " Load Session", "lua require('telescope').extensions.possession.list()", "5" },
             }
 
             require("startup").setup(settings)
@@ -195,9 +195,22 @@ return {
         end
     },
     { -- session manager
-        'Shatur/neovim-session-manager',
-        cmd = "SessionManager",
+        'jedrzejboczar/possession.nvim',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        cmd = {
+            'PossessionSave',
+            'PossessionLoad',
+            'PossessionClose',
+            'PossessionDelete',
+            'PossessionShow',
+            'PossessionList',
+            'PossessionMigrate',
+        },
         event = "BufRead",
+        config = function()
+            require('possession').setup({})
+            require('telescope').load_extension('possession')
+        end,
     },
     {
         "folke/trouble.nvim",

@@ -260,11 +260,14 @@ wk.register({
             'Pick for plus register',
         },
     },
-    ['<leader>sn'] = {
-        function()
-            vim.cmd("ISwapNode")
-        end,
-        'Interactively swap node',
+    ['<leader>s'] = {
+        name = '+Session',
+        o = {
+            function()
+                require('telescope').extensions.possession.list()
+            end,
+            'Open session',
+        }
     },
 })
 
@@ -289,6 +292,12 @@ wk.register({
                 vim.lsp.buf.format()
             end,
             "Format file",
+        },
+        sn = {
+            function()
+                vim.cmd("ISwapNode")
+            end,
+            'Interactively swap node',
         },
     },
     g = {
