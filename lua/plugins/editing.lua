@@ -67,13 +67,11 @@ return {
         end,
     },
     {
-        'Wansmer/sibling-swap.nvim',
-        lazy = true,
-        config = function()
-            require('sibling-swap').setup({
-                use_default_keymaps = false,
-            })
-        end,
+        'mizlan/iswap.nvim',
+        cmd = {
+            "ISwap",
+            "ISwapNode",
+        },
     },
     {
         -- fast insert mode exit

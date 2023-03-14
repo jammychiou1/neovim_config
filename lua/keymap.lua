@@ -15,9 +15,6 @@ wk.register({
     s = { function() require('substitute').operator() end, 'Substitute' },
     ss = { function() require('substitute').line() end, 'Substitute line' }, -- nmapping '_' (start of line) breaks this
     S = { function() require('substitute').eol() end, 'Substitute to end of line' },
-
-    -- ['{'] = { function() require('sibling-swap').swap_with_left() end, 'Swap with left' },
-    -- ['}'] = { function() require('sibling-swap').swap_with_right() end, 'Swap with right' },
 })
 
 wk.register({
@@ -262,6 +259,12 @@ wk.register({
             end,
             'Pick for plus register',
         },
+    },
+    ['<leader>sn'] = {
+        function()
+            vim.cmd("ISwapNode")
+        end,
+        'Interactively swap node',
     },
 })
 
