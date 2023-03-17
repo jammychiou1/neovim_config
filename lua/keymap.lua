@@ -255,7 +255,7 @@ wk.register({
         name = '+Register',
         p = {
             function()
-                require('telescope').extensions.neoclip.plus()
+                require('telescope').extensions.neoclip.default()
             end,
             'Pick for plus register',
         },
@@ -280,6 +280,18 @@ wk.register({
                 vim.cmd("Lspsaga code_action")
             end,
             "Code action",
+        },
+        ci = {
+            function()
+                vim.cmd("Lspsaga incoming_calls")
+            end,
+            "Incoming calls",
+        },
+        co = {
+            function()
+                vim.cmd("Lspsaga outgoing_calls")
+            end,
+            "Outgoing calls",
         },
         rn = {
             function()

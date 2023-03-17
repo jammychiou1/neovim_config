@@ -110,7 +110,25 @@ return {
             'kkharji/sqlite.lua',
         },
         config = function()
-            require('neoclip').setup()
+            require('neoclip').setup({
+                enable_persistent_history = true,
+                default_register = {'"', '+', '*'},
+                default_register_macros = 'm', -- for macrobatics
+            })
+        end,
+    },
+    {
+        'ojroques/nvim-osc52',
+        cond = function()
+            return vim.env['SSH_CLIENT'] ~= nil
+        end,
+        config = function()
+            local handler = function()
+                if vim.v.event.regname == '"' then
+                    require('osc52').copy_register('"')
+                end
+            end
+            vim.api.create_autocmd('TextYankPost', { callback = handler })
         end,
     },
 }
