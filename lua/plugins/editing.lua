@@ -23,12 +23,6 @@ return {
         config = true
     },
     {
-        -- new delete operation
-        'svermeulen/vim-cutlass',
-        enabled = false,
-        lazy = true,
-    },
-    {
         -- easy motion
         'phaazon/hop.nvim',
         branch = 'v2', -- optional but strongly recommended
@@ -119,16 +113,18 @@ return {
     },
     {
         'ojroques/nvim-osc52',
+        -- enabled = false,
         cond = function()
             return vim.env['SSH_CLIENT'] ~= nil
         end,
         config = function()
             local handler = function()
-                if vim.v.event.regname == '"' then
+                -- print(vim.inspect(vim.v.event))
+                if vim.v.event.regname == '' then
                     require('osc52').copy_register('"')
                 end
             end
-            vim.api.create_autocmd('TextYankPost', { callback = handler })
+            vim.api.nvim_create_autocmd('TextYankPost', { callback = handler })
         end,
     },
 }
