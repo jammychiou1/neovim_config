@@ -70,6 +70,7 @@ return {
     },
     {
         'mrded/nvim-lsp-notify',
+        enabled = false,
         event = "BufRead",
         config = function()
             require('lsp-notify').setup({})
