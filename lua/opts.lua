@@ -37,3 +37,5 @@ opt.splitbelow = true
 -- synchronize the unnamed register with the clipboard register
 opt.clipboard:prepend('unnamedplus')
 
+-- set default shell of built-in terminal
+opt.shell = 'zsh'

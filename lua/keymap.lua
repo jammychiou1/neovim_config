@@ -165,6 +165,12 @@ wk.register({
             end,
             'Open new tab'
         },
+        e = {
+            function()
+                vim.cmd('terminal')
+            end,
+            'Open terminal'
+        },
     },
 })
 
