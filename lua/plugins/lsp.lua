@@ -34,36 +34,43 @@ return {
         event = "VeryLazy",
         dependencies = {
             'williamboman/mason-lspconfig.nvim',
+            {
+                'tamago324/nlsp-settings.nvim',
+                config = function()
+                    require("nlspsettings").setup({})
+                end,
+            },
         },
         config = function()
-            local function generate_capabilities()
-                local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local lspconfig = require("lspconfig")
 
-                capabilities.textDocument.foldingRange = {
-                    dynamicRegistration = false,
-                    lineFoldingOnly = true
-                }
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-                return capabilities
-            end
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true
+            }
+
+            lspconfig.util.default_config = vim.tbl_extend("force", lspconfig.util.default_config, {
+              capabilities = capabilities,
+            })
 
             for _, server_name in pairs(servers) do
-                local settings = {}
-                if server_name == 'texlab' then
-                    settings = {
-                        texlab = {
-                            latexindent = {
-                                -- latexindent config is complicated
-                                -- vim.fn.expand does not recognize '${HOME}'
-                                ['local'] = vim.fn.stdpath("config") .. "/indentSetting.yaml"
-                            },
-                        },
-                    }
-                end
+                -- local settings = {}
+                -- if server_name == 'texlab' then
+                --     settings = {
+                --         texlab = {
+                --             latexindent = {
+                --                 -- latexindent config is complicated
+                --                 -- vim.fn.expand does not recognize '${HOME}'
+                --                 ['local'] = vim.fn.stdpath("config") .. "/indentSetting.yaml"
+                --             },
+                --         },
+                --     }
+                -- end
                 require('lspconfig')[server_name].setup({
-                    capabilities = generate_capabilities(),
-                    -- on_attach = my_on_attach,
-                    settings = settings,
+                    -- capabilities = generate_capabilities(),
+                    -- settings = settings,
                 })
             end
         end,
