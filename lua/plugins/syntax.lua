@@ -9,8 +9,8 @@ return {
         config = function()
             require('nvim-treesitter.configs').setup({
                 ensure_installed = {
-                    "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "latex",
-                    "javascript", "html", "verilog"
+                    "c", "cpp", "make", "cmake", "go", "python", "lua", "bash", "markdown", "markdown_inline",
+                    "latex", "javascript", "html", "verilog"
                 },
             })
         end

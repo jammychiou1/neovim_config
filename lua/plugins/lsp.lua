@@ -2,16 +2,16 @@
 local servers = {
     'clangd',
     -- no language server for make yet
-    'cmake',
-    'gopls',
-    'pyright',
+    -- 'cmake',
+    -- 'gopls',
+    -- 'pyright',
     'lua_ls',
-    'bashls',
-    'marksman',
+    -- 'bashls',
+    -- 'marksman',
     'texlab',
-    'tsserver',
-    'html',
-    'svlangserver',
+    -- 'tsserver',
+    -- 'html',
+    -- 'svlangserver',
 }
 
 return {
