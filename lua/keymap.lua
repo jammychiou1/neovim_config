@@ -165,20 +165,33 @@ wk.register({
             end,
             'Close buffer'
         },
-    },
-    ["("] = {
-        function()
-            vim.cmd('bNext')
-        end,
-        'Previous buffer'
-    },
-    [")"] = {
-        function()
-            vim.cmd('bnext')
-        end,
-        'Next buffer'
+        -- whichkey does not like mapping (){} for some reason...
+        -- ["("] = {
+        --     function()
+        --         vim.cmd('BufferLineCyclePrev')
+        --     end,
+        --     'Previous buffer'
+        -- },
+        -- [")"] = {
+        --     function()
+        --         vim.cmd('BufferLineCycleNext')
+        --     end,
+        --     'Next buffer'
+        -- },
     },
 })
+
+vim.keymap.set(
+    'n', '(', function()
+        vim.cmd('BufferLineCyclePrev')
+    end, { desc = 'Previous buffer' }
+)
+
+vim.keymap.set(
+    'n', ')', function()
+        vim.cmd('BufferLineCycleNext')
+    end, { desc = 'Next buffer' }
+)
 
 -- UI related
 wk.register({
