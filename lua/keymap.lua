@@ -73,13 +73,13 @@ wk.register({
         end,
         'Hop line',
     },
-    ['e'] = {
+    ['m'] = {
         function()
             require('hop').hint_words()
         end,
         'Hop word',
     },
-    ['E'] = {
+    ['M'] = {
         function()
             require('hop').hint_words({
                 hint_position = require 'hop.hint'.HintPosition.END,
@@ -87,18 +87,6 @@ wk.register({
         end,
         'Hop end of word',
     },
-    -- ['m'] = {
-    --     function()
-    --         require('tsht').move({ side = "start" })
-    --     end,
-    --     'Hop node',
-    -- },
-    -- ['M'] = {
-    --     function()
-    --         require('tsht').move({ side = "end" })
-    --     end,
-    --     'Hop end of node',
-    -- },
 }, {
     mode = { 'n', 'x', 'o' },
 })
@@ -171,6 +159,24 @@ wk.register({
             end,
             'Open terminal'
         },
+        q = {
+            function()
+                vim.cmd('bdelete')
+            end,
+            'Close buffer'
+        },
+    },
+    ["("] = {
+        function()
+            vim.cmd('bNext')
+        end,
+        'Previous buffer'
+    },
+    [")"] = {
+        function()
+            vim.cmd('bnext')
+        end,
+        'Next buffer'
     },
 })
 

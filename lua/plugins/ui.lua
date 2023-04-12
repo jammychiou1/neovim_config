@@ -122,7 +122,7 @@ return {
             }
             require('bufferline').setup({
                 options = {
-                    mode = 'tabs',
+                    -- mode = 'tabs',
                     separator_style = 'thick',
                     show_close_icon = false
                 },
