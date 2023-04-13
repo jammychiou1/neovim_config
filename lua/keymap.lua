@@ -98,51 +98,61 @@ local dig_word = '[[:digit:]]\\+'
 local space_word = '[[:space:]]\\+'
 local re = punct .. bar .. alph_word .. bar .. dig_word .. bar .. space_word
 
-wk.register({
-    ['<Tab>'] = {
-        function()
-            require('hop').hint_patterns({
-                current_line_only = true,
-                hint_offset = 1,
-                hint_position = require 'hop.hint'.HintPosition.END
-            }, re)
-        end,
-        'Hop in line'
-    },
-    ['<S-Tab>'] = {
-        function()
-            require('hop').hint_patterns({
-                current_line_only = true,
-            }, re)
-        end,
-        'Hop in line',
-    },
-}, {
-    mode = { 'i' },
-})
+-- vim.keymap.set(
+--     'i', '<Tab>', function()
+--         require('hop').hint_patterns({
+--             current_line_only = true,
+--             hint_offset = 1,
+--             hint_position = require 'hop.hint'.HintPosition.END
+--         }, re)
+--     end, { desc = 'Hop in line' }
+-- )
 
-wk.register({
-    ['<Tab>'] = {
-        function()
-            require('hop').hint_patterns({
-                current_line_only = true,
-                --hint_offset = 1,
-                hint_position = require 'hop.hint'.HintPosition.END
-            }, re)
-        end,
-        'Hop in line'
-    },
-    ['<S-Tab>'] = {
-        function()
-            require('hop').hint_patterns({
-                current_line_only = true,
-            }, re)
-        end,
-        'Hop in line',
-    },
-}, {
-    mode = { 'n', 'x', 'o' },
-})
+-- wk.register({
+--     ['<Tab>'] = {
+--         function()
+--             require('hop').hint_patterns({
+--                 current_line_only = true,
+--                 hint_offset = 1,
+--                 hint_position = require 'hop.hint'.HintPosition.END
+--             }, re)
+--         end,
+--         'Hop in line'
+--     },
+--     ['<S-Tab>'] = {
+--         function()
+--             require('hop').hint_patterns({
+--                 current_line_only = true,
+--             }, re)
+--         end,
+--         'Hop in line',
+--     },
+-- }, {
+--     mode = { 'i' },
+-- })
+--
+-- wk.register({
+--     ['<Tab>'] = {
+--         function()
+--             require('hop').hint_patterns({
+--                 current_line_only = true,
+--                 --hint_offset = 1,
+--                 hint_position = require 'hop.hint'.HintPosition.END
+--             }, re)
+--         end,
+--         'Hop in line'
+--     },
+--     ['<S-Tab>'] = {
+--         function()
+--             require('hop').hint_patterns({
+--                 current_line_only = true,
+--             }, re)
+--         end,
+--         'Hop in line',
+--     },
+-- }, {
+--     mode = { 'n', 'x', 'o' },
+-- })
 
 wk.register({
     ["<C-w>"] = {
