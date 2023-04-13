@@ -5,6 +5,7 @@ return {
 
     { -- startup page
         "startup-nvim/startup.nvim",
+        enabled = false,
         config = function()
             local settings = require('startup.themes.dashboard')
             settings.body.content = {
