@@ -50,20 +50,20 @@ wk.register({
 --     mode = { 'x', 'o' },
 -- })
 
--- The above doesn't work for some unknown reason
--- Maybe whichkey xmap is not working correctly
-vim.cmd("omap     <silent> <CR> :<C-U>lua require('tsht').nodes()<CR>")
-vim.cmd("xnoremap <silent> <CR> :lua require('tsht').nodes()<CR>")
-
-wk.register({
-    ['<CR>'] = {
-        'v<CR>',
-        'Select node',
-    },
-}, {
-    mode = { 'n' },
-    noremap = false,
-})
+-- -- The above doesn't work for some unknown reason
+-- -- Maybe whichkey xmap is not working correctly
+-- vim.cmd("omap     <silent> <CR> :<C-U>lua require('tsht').nodes()<CR>")
+-- vim.cmd("xnoremap <silent> <CR> :lua require('tsht').nodes()<CR>")
+--
+-- wk.register({
+--     ['<CR>'] = {
+--         'v<CR>',
+--         'Select node',
+--     },
+-- }, {
+--     mode = { 'n' },
+--     noremap = false,
+-- })
 
 -- Hop motion
 wk.register({
@@ -91,12 +91,12 @@ wk.register({
     mode = { 'n', 'x', 'o' },
 })
 
-local bar = '\\|'
-local punct = '[[:punct:]]'
-local alph_word = '[[:alpha:]]\\+'
-local dig_word = '[[:digit:]]\\+'
-local space_word = '[[:space:]]\\+'
-local re = punct .. bar .. alph_word .. bar .. dig_word .. bar .. space_word
+-- local bar = '\\|'
+-- local punct = '[[:punct:]]'
+-- local alph_word = '[[:alpha:]]\\+'
+-- local dig_word = '[[:digit:]]\\+'
+-- local space_word = '[[:space:]]\\+'
+-- local re = punct .. bar .. alph_word .. bar .. dig_word .. bar .. space_word
 
 -- vim.keymap.set(
 --     'i', '<Tab>', function()
