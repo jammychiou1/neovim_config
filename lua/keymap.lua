@@ -192,13 +192,13 @@ wk.register({
 })
 
 vim.keymap.set(
-    'n', '(', function()
+    'n', '<S-(>', function()
         vim.cmd('BufferLineCyclePrev')
     end, { desc = 'Previous buffer' }
 )
 
 vim.keymap.set(
-    'n', ')', function()
+    'n', '<S-)>', function()
         vim.cmd('BufferLineCycleNext')
     end, { desc = 'Next buffer' }
 )

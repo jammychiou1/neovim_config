@@ -1,14 +1,14 @@
 -- lsp stuff
 local servers = {
-    'clangd',
+    -- 'clangd',
     -- no language server for make yet
     -- 'cmake',
     -- 'gopls',
     -- 'pyright',
-    'lua_ls',
+    -- 'lua_ls',
     -- 'bashls',
     -- 'marksman',
-    'texlab',
+    -- 'texlab',
     -- 'tsserver',
     -- 'html',
     -- 'svlangserver',
