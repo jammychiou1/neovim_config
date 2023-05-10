@@ -38,4 +38,4 @@ opt.splitbelow = true
 opt.clipboard:prepend('unnamedplus')
 
 -- set default shell of built-in terminal
-opt.shell = 'zsh'
+opt.shell = 'fish'
