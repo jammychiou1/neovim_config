@@ -3,22 +3,6 @@ return {
     'kyazdani42/nvim-web-devicons', -- nerd font icons
     'nvim-lua/plenary.nvim', -- helper plugin required by many UI plugins
 
-    { -- startup page
-        "startup-nvim/startup.nvim",
-        enabled = false,
-        config = function()
-            local settings = require('startup.themes.dashboard')
-            settings.body.content = {
-                { " Find File", "Telescope find_files", "1" },
-                { " Find Word", "Telescope live_grep", "2" },
-                { " Recent Files", "Telescope oldfiles", "3" },
-                { " New File", "lua require'startup'.new_file()", "4" },
-                { " Load Session", "lua require('telescope').extensions.possession.list()", "5" },
-            }
-
-            require("startup").setup(settings)
-        end
-    },
     { -- fancy statusline
         'nvim-lualine/lualine.nvim',
         config = function()
@@ -181,9 +165,6 @@ return {
                 easing_function = "quadratic" -- Default easing function
             })
         end
-        -- cond = function()
-        --     return not vim.g.neovide
-        -- end,
     },
     { -- persistent terminals
         "akinsho/toggleterm.nvim",
@@ -212,20 +193,5 @@ return {
             require('possession').setup({})
             require('telescope').load_extension('possession')
         end,
-    },
-    {
-        "folke/trouble.nvim",
-        cmd = "TroubleToggle",
-        config = function()
-            require("trouble").setup()
-        end
-    },
-    {
-        'sindrets/diffview.nvim',
-        cmd = 'DiffviewOpen',
-    },
-    {
-        "elihunter173/dirbuf.nvim",
-        cmd = 'Dirbuf',
     },
 }

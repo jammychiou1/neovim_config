@@ -40,31 +40,6 @@ wk.register({
     mode = { 'n', 'x', 'o' },
 })
 
--- Text Object
--- wk.register({
---     ['m'] = {
---         "<cmd>lua require('tsht').nodes()<CR>",
---         'Syntax Node',
---     },
--- }, {
---     mode = { 'x', 'o' },
--- })
-
--- -- The above doesn't work for some unknown reason
--- -- Maybe whichkey xmap is not working correctly
--- vim.cmd("omap     <silent> <CR> :<C-U>lua require('tsht').nodes()<CR>")
--- vim.cmd("xnoremap <silent> <CR> :lua require('tsht').nodes()<CR>")
---
--- wk.register({
---     ['<CR>'] = {
---         'v<CR>',
---         'Select node',
---     },
--- }, {
---     mode = { 'n' },
---     noremap = false,
--- })
-
 -- Hop motion
 wk.register({
     ['^'] = {
@@ -91,69 +66,6 @@ wk.register({
     mode = { 'n', 'x', 'o' },
 })
 
--- local bar = '\\|'
--- local punct = '[[:punct:]]'
--- local alph_word = '[[:alpha:]]\\+'
--- local dig_word = '[[:digit:]]\\+'
--- local space_word = '[[:space:]]\\+'
--- local re = punct .. bar .. alph_word .. bar .. dig_word .. bar .. space_word
-
--- vim.keymap.set(
---     'i', '<Tab>', function()
---         require('hop').hint_patterns({
---             current_line_only = true,
---             hint_offset = 1,
---             hint_position = require 'hop.hint'.HintPosition.END
---         }, re)
---     end, { desc = 'Hop in line' }
--- )
-
--- wk.register({
---     ['<Tab>'] = {
---         function()
---             require('hop').hint_patterns({
---                 current_line_only = true,
---                 hint_offset = 1,
---                 hint_position = require 'hop.hint'.HintPosition.END
---             }, re)
---         end,
---         'Hop in line'
---     },
---     ['<S-Tab>'] = {
---         function()
---             require('hop').hint_patterns({
---                 current_line_only = true,
---             }, re)
---         end,
---         'Hop in line',
---     },
--- }, {
---     mode = { 'i' },
--- })
---
--- wk.register({
---     ['<Tab>'] = {
---         function()
---             require('hop').hint_patterns({
---                 current_line_only = true,
---                 --hint_offset = 1,
---                 hint_position = require 'hop.hint'.HintPosition.END
---             }, re)
---         end,
---         'Hop in line'
---     },
---     ['<S-Tab>'] = {
---         function()
---             require('hop').hint_patterns({
---                 current_line_only = true,
---             }, re)
---         end,
---         'Hop in line',
---     },
--- }, {
---     mode = { 'n', 'x', 'o' },
--- })
-
 wk.register({
     ["<C-w>"] = {
         name = "+Windowing",
@@ -175,30 +87,17 @@ wk.register({
             end,
             'Close buffer'
         },
-        -- whichkey does not like mapping (){} for some reason...
-        -- ["("] = {
-        --     function()
-        --         vim.cmd('BufferLineCyclePrev')
-        --     end,
-        --     'Previous buffer'
-        -- },
-        -- [")"] = {
-        --     function()
-        --         vim.cmd('BufferLineCycleNext')
-        --     end,
-        --     'Next buffer'
-        -- },
     },
 })
 
 vim.keymap.set(
-    'n', '<S-(>', function()
+    'n', '(', function()
         vim.cmd('BufferLineCyclePrev')
     end, { desc = 'Previous buffer' }
 )
 
 vim.keymap.set(
-    'n', '<S-)>', function()
+    'n', ')', function()
         vim.cmd('BufferLineCycleNext')
     end, { desc = 'Next buffer' }
 )
@@ -207,36 +106,18 @@ vim.keymap.set(
 wk.register({
     ['<leader>u'] = {
         name = '+Toggle UI',
-        t = {
-            function()
-                vim.cmd("TroubleToggle")
-            end,
-            'Toggle trouble list',
-        },
         d = {
             function()
                 require("nvim-tree.api").tree.toggle()
             end,
             'Toggle directory viewer',
         },
-        o = {
-            function()
-                vim.cmd("Lspsaga outline")
-            end,
-            'Toggle LSP outline',
-        },
     },
     ['<leader>t'] = {
         name = '+ToggleTerm',
-        t = {
-            function()
-                vim.cmd("ToggleTerm direction=tab")
-            end,
-            'ToggleTerm in new tab',
-        },
         v = {
             function()
-                vim.cmd("ToggleTerm direction=vertical size=40")
+                vim.cmd("ToggleTerm direction=vertical size=60")
             end,
             'ToggleTerm in vertical split',
         },
@@ -260,12 +141,6 @@ wk.register({
                 require('telescope.builtin').live_grep()
             end,
             'Find word',
-        },
-        b = {
-            function()
-                require('telescope.builtin').buffers()
-            end,
-            'Find buffer',
         },
         h = {
             function()
@@ -295,127 +170,7 @@ wk.register({
             'Pick for plus register',
         },
     },
-    ['<leader>s'] = {
-        name = '+Session',
-        o = {
-            function()
-                require('telescope').extensions.possession.list()
-            end,
-            'Open session',
-        }
-    },
 })
-
--- LSP related
-wk.register({
-    ['<space>'] = {
-        name = '+LSP actions',
-        ca = {
-            function()
-                vim.cmd("Lspsaga code_action")
-            end,
-            "Code action",
-        },
-        ci = {
-            function()
-                vim.cmd("Lspsaga incoming_calls")
-            end,
-            "Incoming calls",
-        },
-        co = {
-            function()
-                vim.cmd("Lspsaga outgoing_calls")
-            end,
-            "Outgoing calls",
-        },
-        rn = {
-            function()
-                vim.cmd("Lspsaga rename")
-            end,
-            "Rename variable",
-        },
-        f = {
-            function()
-                vim.lsp.buf.format()
-            end,
-            "Format file",
-        },
-        sn = {
-            function()
-                vim.cmd("ISwapNode")
-            end,
-            'Interactively swap node',
-        },
-    },
-    g = {
-        h = {
-            function()
-                -- Lsp finder find the symbol definition implement reference
-                -- if there is no implement it will hide
-                -- when you use action in finder like open vsplit then you can
-                -- use <C-t> to jump back
-                vim.cmd("Lspsaga lsp_finder")
-            end,
-            "LSP finder",
-        },
-        d = {
-            function()
-                -- Peek Definition
-                -- you can edit the definition file in this flaotwindow
-                -- also support open/vsplit/etc operation check definition_action_keys
-                -- support tagstack C-t jump back
-                vim.cmd("Lspsaga peek_definition")
-            end,
-            "Peek definition",
-        },
-    },
-    K = {
-        function()
-            vim.cmd("Lspsaga hover_doc")
-        end,
-        "Show LSP Hover",
-    },
-})
-
--- wk.register({
---     ['<space>'] = {
---         name = '+LSP actions',
---         rr = {
---             function()
---                 require('refactoring').select_refactor()
---             end,
---             "Refactor",
---         },
---     },
--- }, {
---     mode = { 'x' }
--- })
-
--- The above doesn't work for some unknown reason
--- Maybe whichkey xmap is not working correctly
-vim.api.nvim_set_keymap(
-    "x",
-    "<space>rr",
-    ":lua require('refactoring').select_refactor()<CR>",
-    { noremap = true, silent = true }
-)
-
-wk.register({
-    ['<space>'] = {
-        sr = {
-            -- not really LSP based, but kinda fits here
-            function()
-                require("ssr").open()
-            end,
-            "Structural replace",
-        },
-    },
-}, {
-    mode = { 'n', 'x' }
-})
--- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
--- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
--- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 
 -- Terminal mode maps
 wk.register({
@@ -443,23 +198,6 @@ wk.register({
 
 -- Macro related
 wk.register({
-    -- ['<leader>m'] = {
-    --     -- name = '+Macro management',
-    --     -- h = {
-    --     --     function()
-    --     --         vim.cmd('DisplayMacroHistory')
-    --     --     end,
-    --     --     "Show macro history",
-    --     -- },
-    --     -- p = {
-    --     --     '<plug>(Mac_RotateBack)',
-    --     --     "Rotate to previous macro",
-    --     -- },
-    --     -- n = {
-    --     --     '<plug>(Mac_RotateForward)',
-    --     --     "Rotate to next macro",
-    --     -- },
-    -- },
     q = {
         '<plug>(Mac_Play)',
         'Execute macro',
@@ -489,12 +227,6 @@ wk.register({
         q = {
             '<plug>(vimtex-log)',
             'Clean up auxiliary files',
-        },
-        p = {
-            function()
-                require("nabla").popup()
-            end,
-            "Preview math",
         },
     },
 })

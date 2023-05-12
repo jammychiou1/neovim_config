@@ -34,38 +34,11 @@ return {
         end,
     },
     {
-        "cshuaimin/ssr.nvim",
-        lazy = true,
-    },
-    {
-        'mfussenegger/nvim-treehopper',
-        dependencies = {
-            'phaazon/hop.nvim',
-        },
-        lazy = true,
-        config = function()
-            local keys = 'asdghklqwertyuiopzxcvbnmfj' -- this is the default for hop.nvim
-            local keys_arr = {}
-            for i = 1, #keys do
-                local c = keys:sub(i, i)
-                keys_arr[i] = c
-            end
-            require("tsht").config.hint_keys = keys_arr
-        end,
-    },
-    {
         "LeonHeidelbach/trailblazer.nvim",
         event = "BufRead",
         config = function()
             require("trailblazer").setup()
         end,
-    },
-    {
-        'mizlan/iswap.nvim',
-        cmd = {
-            "ISwap",
-            "ISwapNode",
-        },
     },
     {
         -- fast insert mode exit

@@ -3,9 +3,6 @@ return {
     { -- snippet engine
         'L3MON4D3/LuaSnip',
         lazy = true,
-        config = function()
-            -- require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./luasnip_snippets" } })
-        end,
     },
     { -- completion engine
         'hrsh7th/nvim-cmp',
@@ -14,13 +11,10 @@ return {
             'L3MON4D3/LuaSnip',
 
             -- completion sources
-            'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-cmdline',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
             'saadparwaiz1/cmp_luasnip',
-            -- 'f3fora/cmp-spell',
         },
         config = function()
             local cmp = require('cmp')
@@ -37,9 +31,6 @@ return {
                     ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
                     ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
                     ['<C-y>'] = cmp.mapping(function(fallback)
-                        -- local entry = cmp.get_active_entry()
-                        -- vim.notify(vim.inspect(entry), nil, nil)
-                        -- if entry and entry.completion_item.insertTextFormat == cmp.lsp.InsertTextFormat.Snippet then
                         if cmp.visible() then
                             cmp.confirm({ select = false })
                         elseif luasnip.jumpable(1) then
@@ -59,19 +50,8 @@ return {
                     end, { 'i', 's' }),
                 },
                 sources = cmp.config.sources({
-                    { name = 'nvim_lsp' },
                     { name = 'luasnip' },
-                    { name = 'nvim_lsp_signature_help' },
                     { name = 'path' },
-                    -- {
-                    --     name = 'spell',
-                    --     option = {
-                    --         keep_all_entries = false,
-                    --         enable_in_context = function()
-                    --             return true
-                    --         end,
-                    --     },
-                    -- },
                 }, {
                     { name = 'buffer' },
                 }),

@@ -6,16 +6,12 @@ opt.softtabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 
--- font settings for neovide
-opt.guifont = 'VictorMono Nerd Font:h10'
-
 -- side number settings
 opt.number = true
 opt.relativenumber = true
 
 -- cursorline
 opt.cursorline = true
--- opt.cursorcolumn = true
 
 -- wrap settings
 opt.breakindent = true

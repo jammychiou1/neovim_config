@@ -12,11 +12,6 @@ return {
             -- vim.opt.conceallevel = 2
         end,
     },
-    {
-        'jbyuki/nabla.nvim',
-        ft = 'tex',
-        lazy = true,
-    },
     { -- markdown stuff
         'iamcco/markdown-preview.nvim',
         ft = 'markdown',

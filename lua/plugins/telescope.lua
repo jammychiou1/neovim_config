@@ -7,7 +7,6 @@ return {
         cmd = "Telescope",
         dependencies = {
             "AckslD/nvim-neoclip.lua",
-            'jedrzejboczar/possession.nvim',
         },
     },
 }
