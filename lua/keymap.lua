@@ -113,21 +113,6 @@ wk.register({
             'Toggle directory viewer',
         },
     },
-    ['<leader>t'] = {
-        name = '+ToggleTerm',
-        v = {
-            function()
-                vim.cmd("ToggleTerm direction=vertical size=60")
-            end,
-            'ToggleTerm in vertical split',
-        },
-        f = {
-            function()
-                vim.cmd("ToggleTerm direction=float")
-            end,
-            'ToggleTerm in floating window',
-        },
-    },
     ['<leader>f'] = {
         name = '+File',
         f = {
