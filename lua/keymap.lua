@@ -66,30 +66,6 @@ wk.register({
     mode = { 'n', 'x', 'o' },
 })
 
-wk.register({
-    ["<C-w>"] = {
-        name = "+Windowing",
-        t = {
-            function()
-                vim.cmd('tabnew')
-            end,
-            'Open new tab'
-        },
-        e = {
-            function()
-                vim.cmd('terminal')
-            end,
-            'Open terminal'
-        },
-        q = {
-            function()
-                vim.cmd('bdelete')
-            end,
-            'Close buffer'
-        },
-    },
-})
-
 vim.keymap.set(
     'n', '(', function()
         vim.cmd('BufferLineCyclePrev')
@@ -139,32 +115,7 @@ wk.register({
             end,
             'Recent files',
         },
-        n = {
-            function()
-                require('startup').new_file()
-            end,
-            'New file',
-        },
     },
-    ['<leader>r'] = {
-        name = '+Register',
-        p = {
-            function()
-                require('telescope').extensions.neoclip.default()
-            end,
-            'Pick for plus register',
-        },
-    },
-})
-
--- Terminal mode maps
-wk.register({
-    ['<C-j><C-j>'] = {
-        [[<C-\><C-n>]],
-        "Fast exit"
-    }
-}, {
-    mode = 't',
 })
 
 -- Insert mode maps
@@ -190,28 +141,5 @@ wk.register({
     gq = {
         '<plug>(Mac_RecordNew)',
         'Record new macro',
-    },
-})
-
--- vimtex
-wk.register({
-    ['<leader>l'] = {
-        name = '+vimtex',
-        l = {
-            '<plug>(vimtex-compile)',
-            'Toggle compiling',
-        },
-        v = {
-            '<plug>(vimtex-view)',
-            'Preview PDF',
-        },
-        c = {
-            '<plug>(vimtex-clean)',
-            'Clean up auxiliary files',
-        },
-        q = {
-            '<plug>(vimtex-log)',
-            'Clean up auxiliary files',
-        },
     },
 })

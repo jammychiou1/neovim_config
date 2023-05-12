@@ -17,4 +17,3 @@ require("lazy").setup("plugins")
 
 require('opts')
 require('keymap')
-require('snippets')

@@ -72,27 +72,12 @@ return {
         end,
     },
     {
-        "AckslD/nvim-neoclip.lua",
-        dependencies = {
-            'kkharji/sqlite.lua',
-        },
-        config = function()
-            require('neoclip').setup({
-                enable_persistent_history = true,
-                default_register = {'"', '+', '*'},
-                default_register_macros = 'm', -- for macrobatics
-            })
-        end,
-    },
-    {
         'ojroques/nvim-osc52',
-        -- enabled = false,
         cond = function()
             return vim.env['SSH_CLIENT'] ~= nil
         end,
         config = function()
             local handler = function()
-                -- print(vim.inspect(vim.v.event))
                 if vim.v.event.regname == '' then
                     require('osc52').copy_register('"')
                 end
