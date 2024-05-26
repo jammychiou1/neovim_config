@@ -16,7 +16,6 @@ return {
     },
     { -- fancy tab line
         'akinsho/bufferline.nvim',
-        version = 'v3.*',
         config = function()
             require('bufferline').setup({})
         end,
