@@ -98,4 +98,11 @@ return {
             require('telescope').load_extension('possession')
         end,
     },
+    { -- Bdelete
+        'moll/vim-bbye',
+        cmd = {
+            'Bdelete',
+            'Bwipeout',
+        },
+    },
 }
